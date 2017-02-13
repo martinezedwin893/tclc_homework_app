@@ -5,7 +5,6 @@ This is a TCLC Homework Helper App written in React.
 ## To Start
 
 ```
-This too
 npm install
 npm start
 ```
