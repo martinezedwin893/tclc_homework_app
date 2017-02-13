@@ -1,0 +1,32 @@
+.navigation {
+  position: fixed;
+  height: 50px;
+  width: 100vw;
+  border-bottom: 5px solid $primary-blue;
+  color: $gray;
+
+  .logo{
+    padding: 5px 0;
+    float: left;
+    margin-left: 35px;
+    font-size: 2em;
+  }
+  .nav-buttons {
+    padding: 15px 0;
+    float: right;
+    margin-right: 35px;
+  }
+
+  .nav-link {
+    margin-left: 20px;
+    color: $gray;
+  }
+
+  .nav-link:hover {
+    color: $primary-blue;
+  }
+
+  .page-active {
+    color: $primary-blue;
+  }
+}
