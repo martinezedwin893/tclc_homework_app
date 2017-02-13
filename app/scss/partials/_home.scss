@@ -1,0 +1,20 @@
+.home {
+  position: relative;
+  top: 60px;
+
+  .left-panel {
+    width: 70vw;
+    height: 100vh;
+    border-right: 1px solid $light-gray;
+
+    .date {
+      width: 70vw;
+      position: fixed;
+      top: 60px;
+      background: $light-gray;
+      text-align: center;
+      height: 30px;
+      padding: 3px;
+    }
+  }
+}

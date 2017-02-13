@@ -4,6 +4,7 @@ require('./css/globals.css')
 
 import Nav from './components/nav.js'
 import Home from './components/home.js'
+import Login from './components/login.js'
 
 class App extends Component {
   render () {
@@ -11,6 +12,7 @@ class App extends Component {
       <Router history={hashHistory}>
         <Route path='/' component={Container}>
           <IndexRoute component={Home} />
+          <Route path='login' component={Login} />
           <Route path='*' component={NotFound} />
         </Route>
       </Router>

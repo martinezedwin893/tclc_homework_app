@@ -5,15 +5,33 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px; }
 
-a {
+a, a:hover, a:visited, a:link, a:active {
   text-decoration: none; }
+
+.home {
+  position: relative;
+  top: 60px; }
+  .home .left-panel {
+    width: 70vw;
+    height: 100vh;
+    border-right: 1px solid #D8D8D8; }
+    .home .left-panel .date {
+      width: 70vw;
+      position: fixed;
+      top: 60px;
+      background: #D8D8D8;
+      text-align: center;
+      height: 30px;
+      padding: 3px; }
 
 .navigation {
   position: fixed;
-  height: 50px;
+  height: 60px;
   width: 100vw;
   border-bottom: 5px solid #61BBE3;
-  color: #9B9B9B; }
+  color: #9B9B9B;
+  z-index: 100;
+  background: white; }
   .navigation .logo {
     padding: 5px 0;
     float: left;
@@ -30,5 +48,46 @@ a {
     color: #61BBE3; }
   .navigation .page-active {
     color: #61BBE3; }
+
+.login {
+  position: relative;
+  top: 60px;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .login-box {
+    width: 50vw;
+    height: 40vh;
+    border: 3px solid #9B9B9B;
+    text-align: center;
+    padding: 40px 10px; }
+    .login-box .user-login {
+      margin-bottom: 70px; }
+    .login-box .input {
+      display: block;
+      width: 20vw;
+      margin: auto;
+      text-align: left;
+      padding: 5px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #9B9B9B; }
+    .login-box .login-button {
+      color: white;
+      background: #61BBE3;
+      width: 20vw;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      margin-top: 35px; }
+    .login-box input:focus,
+    .login-box select:focus,
+    .login-box textarea:focus,
+    .login-box button:focus, .login-box input {
+      outline: none; }
+    .login-box input {
+      border: none; }
 
 /*# sourceMappingURL=globals.css.map */

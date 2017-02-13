@@ -1,9 +1,11 @@
 .navigation {
   position: fixed;
-  height: 50px;
+  height: 60px;
   width: 100vw;
   border-bottom: 5px solid $primary-blue;
   color: $gray;
+  z-index: 100;
+  background: white;
 
   .logo{
     padding: 5px 0;

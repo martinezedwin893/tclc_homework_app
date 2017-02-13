@@ -1,0 +1,57 @@
+.login {
+  position: relative;
+  top: 60px;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-box {
+    width: 50vw;
+    height: 40vh;
+    border: 3px solid $gray;
+    text-align: center;
+    padding: 40px 10px;
+
+    .user-login {
+      margin-bottom: 70px;
+    }
+
+    .input {
+      display: block;
+      width: 20vw;
+      margin: auto;
+      text-align: left;
+      padding: 5px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid $gray;
+    }
+
+    .login-button {
+      color: white;
+      background: $primary-blue;
+      width: 20vw;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      margin-top: 35px;
+    }
+
+    input:focus,
+      select:focus,
+      textarea:focus,
+      button:focus, input {
+          outline: none;
+    }
+
+    input {
+      border: none;
+    }
+
+  }
+
+
+
+}
