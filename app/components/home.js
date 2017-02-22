@@ -11,6 +11,7 @@ class Home extends Component {
 
     this.state = {
       user: [],
+      activeUser: {"first": "Welcome", "last":"Back!"}
     };
   }
 
@@ -26,6 +27,18 @@ class Home extends Component {
 
   }
 
+  clickRow (index) {
+    console.log(index);
+    let currentUsers = this.state.user;
+    let activeUser = currentUsers[index];
+    this.setState({
+      activeUser: activeUser
+    });
+    console.log(activeUser);
+
+  }
+
+
   /*Renders table with names*/
   renderTable(){
     let length = this.state.user.length;
@@ -33,6 +46,7 @@ class Home extends Component {
 
 
     let usersArray = currentUsers.map( function(currentUser, index){
+
         //TODO: Only checks for 2-12-17
         let homeworkCompleted;
         if("scores" in currentUser && "02-12-17" in currentUser.scores){
@@ -44,19 +58,19 @@ class Home extends Component {
         //If condition to switch colors
         if(index%2 == 0){
         return(
-          <div className="chart-table-row isGray" key={currentUser.first}>
+          <div onClick={this.clickRow.bind(this,index)} className="chart-table-row isGray" key={currentUser.first}>
             <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
             {homeworkCompleted}
           </div>);
         } else{
         return(
-          <div className="chart-table-row" key={currentUser.first}>
+          <div onClick={this.clickRow.bind(this,index)} className="chart-table-row" key={currentUser.first}>
             <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
             {homeworkCompleted}
           </div>);
         }
-      }
-    )
+      },this
+    );
 
     return(
       <div className="chart-table">{usersArray}</div>
@@ -64,6 +78,8 @@ class Home extends Component {
   }
 
   render () {
+
+    let selected = this.state.activeUser;
 
     return(
       <div className="home">
@@ -75,6 +91,20 @@ class Home extends Component {
               <div className="chart-header-completed"> Homework Completed</div>
             </div>
             {this.renderTable()}
+          </div>
+        </div>
+        <div className="right-panel">
+          <h1>{selected.first}</h1>
+          <h1>{selected.last}</h1>
+          <div className="points">
+            <h4>Add Points</h4>
+            <div className="points-buttons">
+              <div className="points-buttons-button">-</div>
+              <input className="points-buttons-input" placeholder="0"></input>
+              <div className="points-buttons-button">+</div>
+            </div>
+            <h4>Reason</h4>
+            <div className="add-button">Add</div>
           </div>
         </div>
       </div>
