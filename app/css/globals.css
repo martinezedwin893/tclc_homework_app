@@ -22,7 +22,42 @@ a, a:hover, a:visited, a:link, a:active {
       background: #D8D8D8;
       text-align: center;
       height: 30px;
-      padding: 3px; }
+      padding: 3px;
+      z-index: 100; }
+    .home .left-panel .chart {
+      padding: 5%;
+      position: relative;
+      top: 30px; }
+      .home .left-panel .chart-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5vw; }
+        .home .left-panel .chart-header-completed {
+          margin-right: 100px; }
+      .home .left-panel .chart-table {
+        margin-top: 10px; }
+        .home .left-panel .chart-table-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 5vw;
+          height: 5vh;
+          border: 2px solid transparent; }
+          .home .left-panel .chart-table-row-completed {
+            color: #7ED321;
+            border-color: #7ED321; }
+          .home .left-panel .chart-table-row-notcompleted {
+            color: #FD5C63;
+            border-color: #FD5C63; }
+          .home .left-panel .chart-table-row-completed, .home .left-panel .chart-table-row-notcompleted {
+            margin-right: 100px;
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 2px 5px; }
+        .home .left-panel .chart-table-row:hover {
+          border: 2px solid #61BBE3; }
+        .home .left-panel .chart-table .isGray {
+          background: #F2F2F2; }
 
 .navigation {
   position: fixed;

@@ -7,13 +7,13 @@ import Home from './components/home.js'
 import Login from './components/login.js'
 
 class App extends Component {
+
   render () {
     return (
       <Router history={hashHistory}>
         <Route path='/' component={Container}>
           <IndexRoute component={Home} />
           <Route path='login' component={Login} />
-          <Route path='*' component={NotFound} />
         </Route>
       </Router>
     )
@@ -30,9 +30,6 @@ const Address = (props) => <div>
   <h1>We are located at 555 Jackson St.</h1>
   {props.children}
 </div>
-
-const NotFound = () => (
-  <h1>404.. This page is not found!</h1>)
 
 const Container = (props) => <div>
   <Nav />
