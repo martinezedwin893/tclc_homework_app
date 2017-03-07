@@ -17,16 +17,7 @@ class Home extends Component {
   }
 
   componentWillMount () {
-    /*
-    let users = [];
-    this.firebaseRef = firebase.database().ref("users");
-    this.firebaseRef.on("child_added", function(dataSnapshot) {
-      users.push(dataSnapshot.val());
-      this.setState({
-        user: users
-      });
-    }.bind(this));
-*/
+
     var Rebase = require('re-base');
     var base = Rebase.createClass({
       apiKey: "AIzaSyD_l86M8ZSZilyYVx2nzIsK4s-UT8Hw66s",
@@ -38,22 +29,22 @@ class Home extends Component {
 
      base.syncState('users', {
         context: this,
-        state: 'user',
-        asArray: true
+        state: 'user'
       });
-    //this.bindAsArray(new Firebase("https://homework-app-81383.firebaseio.com/users"), "users");
   }
 
   clickRow (index) {
     console.log(index);
     let currentUsers = this.state.user;
     let activeUser = currentUsers[index];
+    document.getElementById(index).classList.add("selected");
+    console.log(document.getElementById(index).classList);
+
     this.setState({
       activeUser: activeUser,
       index: index
     });
     console.log(activeUser);
-
   }
 
   getDate (){
@@ -69,7 +60,6 @@ class Home extends Component {
 
   addValue(){
     let date = this.getDate();
-    console.log(date);
     let yearMonth = date[0] + "-" + date[1];
     let value = document.getElementById("input-add").value;
     value = parseInt(value);
@@ -77,8 +67,17 @@ class Home extends Component {
     let activeUser = this.state.activeUser;
     let index = this.state.index;
 
-    if(currentUsers[index].points[yearMonth] == undefined){
-      currentUsers[index].points[yearMonth] = {};
+    if(activeUser.first == "Welcome"){
+      return;
+    }
+
+    if(!(yearMonth in currentUsers[index].points)){
+      currentUsers[index].points[yearMonth] = {
+        "completedHomework":0,
+        "month": "March",
+        "totalPoints": 0,
+        "year": 2017
+      };
     }
 
     if(currentUsers[index].points[yearMonth][date[2]] == undefined){
@@ -86,15 +85,10 @@ class Home extends Component {
     }
 
     if(value > 0){
-      currentUsers[index].points[yearMonth][date[2]]["HW"] = value;
+      currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
+      currentUsers[index].points[yearMonth].completedHomework += value;
+      currentUsers[index].points[yearMonth].totalPoints += value;
     }
-
-    /*
-    console.log(firebaseRef.users);
-    this.firebaseRef.users[index].scores.push({
-        date: value
-      }
-    );*/
 
     this.setState({
       user: currentUsers
@@ -102,11 +96,11 @@ class Home extends Component {
   }
 
   decrement(){
-
+    document.getElementById("input-add").value--;
   }
 
   increment(){
-
+    document.getElementById("input-add").value++;
   }
 
   /*Renders table with names*/
@@ -117,33 +111,31 @@ class Home extends Component {
     let yearMonth = date[0] + "-" + date[1];
     let usersArray = [];
 
-    console.log(currentUsers);
-    if(Array.isArray(currentUsers)){
-      usersArray = currentUsers.map( function(currentUser, index){
+    for(var index in currentUsers){
 
-          let homeworkCompleted;
-          if("points" in currentUser && yearMonth in currentUser.points && date[2] in currentUser.points[yearMonth]){
-            homeworkCompleted = <div className="chart-table-row-completed">Completed</div>;
-          } else {
-            homeworkCompleted = <div className="chart-table-row-notcompleted">Not Completed</div>;
-          }
+        let currentUser = currentUsers[index];
 
-          //If condition to switch colors
-          if(index%2 == 0){
-          return(
-            <div onClick={this.clickRow.bind(this,index)} className="chart-table-row isGray" key={currentUser.first}>
-              <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
-              {homeworkCompleted}
-            </div>);
-          } else{
-          return(
-            <div onClick={this.clickRow.bind(this,index)} className="chart-table-row" key={currentUser.first}>
-              <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
-              {homeworkCompleted}
-            </div>);
-          }
-        },this
-      );
+        let homeworkCompleted;
+        if("points" in currentUser && yearMonth in currentUser.points && date[2] in currentUser.points[yearMonth]){
+          homeworkCompleted = <div className="chart-table-row-completed">Completed</div>;
+        } else {
+          homeworkCompleted = <div className="chart-table-row-notcompleted">Not Completed</div>;
+        }
+
+        //If condition to switch colors
+        if(index%2 == 0){
+        usersArray.push(
+          <div onClick={this.clickRow.bind(this,index)} className="chart-table-row isGray" key={index} id={index}>
+            <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
+            {homeworkCompleted}
+          </div>);
+        } else{
+        usersArray.push(
+          <div onClick={this.clickRow.bind(this,index)} className="chart-table-row" key={index} id={index}>
+            <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
+            {homeworkCompleted}
+          </div>);
+        }
     }
 
     return(
@@ -154,11 +146,18 @@ class Home extends Component {
   render () {
 
     let selected = this.state.activeUser;
+    var d = new Date();
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    var weekday = days[d.getDay()];
+    var day = d.getDate();
+    var month = months[d.getMonth()];
+    var year = d.getFullYear();
 
     return(
       <div className="home">
         <div className="left-panel">
-          <div className="date">Monday, February 13, 2017</div>
+          <div className="date">{weekday}, {month} {day}, {year}</div>
           <div className="chart">
             <div className="chart-header">
               <div className="chart-header-names">Names</div>
@@ -173,12 +172,12 @@ class Home extends Component {
           <div className="points">
             <h4>Add Points</h4>
             <div className="points-buttons">
-              <div onClick={this.decrement.bind(this)} className="points-buttons-button">-</div>
+              <button type="button" onClick={this.decrement.bind(this)} className="points-buttons-button">-</button>
               <input id="input-add" className="points-buttons-input" type="number" placeholder="0"></input>
-              <div onClick={this.increment.bind(this)} className="points-buttons-button">+</div>
+              <button onClick={this.increment.bind(this)} className="points-buttons-button">+</button>
             </div>
             <h4>Reason</h4>
-            <div onClick={this.addValue.bind(this)} className="add-button">Add</div>
+            <button type="button" onClick={this.addValue.bind(this)} className="add-button">Add</button>
           </div>
         </div>
       </div>

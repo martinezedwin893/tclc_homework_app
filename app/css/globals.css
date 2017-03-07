@@ -77,26 +77,43 @@ a, a:hover, a:visited, a:link, a:active {
       display: flex;
       justify-content: space-between; }
       .home .right-panel .points-buttons-button {
+        outline: none;
+        padding: 0;
+        margin: 0;
+        border: none;
         background: #61BBE3;
         width: 80px;
         height: 50px;
         border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         color: white;
-        font-size: 2.5em; }
+        font-size: 2em; }
       .home .right-panel .points-buttons-input {
         text-align: center;
         width: 50px; }
+      .home .right-panel .points-buttons-button:hover {
+        background-color: #35677D; }
+      .home .right-panel .points-buttons-button:active {
+        background-color: #35677D;
+        box-shadow: 0 2px #666;
+        transform: translateY(1px); }
     .home .right-panel .points .add-button {
+      outline: none;
+      padding: 0;
+      margin: 0;
+      border: none;
       color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       width: 100%;
       height: 50px;
       background: #61BBE3; }
+    .home .right-panel .points .add-button:hover {
+      background-color: #35677D; }
+    .home .right-panel .points .add-button:active {
+      background-color: #35677D;
+      box-shadow: 0 2px #666;
+      transform: translateY(1px); }
+
+.selected {
+  border: 5px solid #61BBE3; }
 
 .navigation {
   position: fixed;
