@@ -11,7 +11,8 @@ import Settings from './components/settings.js'
 
 class App extends Component {
 
-  render () {
+render () {
+
     return (
       <Router history={hashHistory}>
         <Route path='/' component={Container}>
