@@ -77,26 +77,43 @@ a, a:hover, a:visited, a:link, a:active {
       display: flex;
       justify-content: space-between; }
       .home .right-panel .points-buttons-button {
+        outline: none;
+        padding: 0;
+        margin: 0;
+        border: none;
         background: #61BBE3;
         width: 80px;
         height: 50px;
         border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         color: white;
-        font-size: 2.5em; }
+        font-size: 2em; }
       .home .right-panel .points-buttons-input {
         text-align: center;
         width: 50px; }
+      .home .right-panel .points-buttons-button:hover {
+        background-color: #35677D; }
+      .home .right-panel .points-buttons-button:active {
+        background-color: #35677D;
+        box-shadow: 0 2px #666;
+        transform: translateY(1px); }
     .home .right-panel .points .add-button {
+      outline: none;
+      padding: 0;
+      margin: 0;
+      border: none;
       color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       width: 100%;
       height: 50px;
       background: #61BBE3; }
+    .home .right-panel .points .add-button:hover {
+      background-color: #35677D; }
+    .home .right-panel .points .add-button:active {
+      background-color: #35677D;
+      box-shadow: 0 2px #666;
+      transform: translateY(1px); }
+
+.selected {
+  border: 5px solid #61BBE3; }
 
 .navigation {
   position: fixed;
@@ -163,5 +180,48 @@ a, a:hover, a:visited, a:link, a:active {
       outline: none; }
     .login-box input {
       border: none; }
+
+
+.leaderboard {
+    width: 100vw;
+    top: 60px;
+    display: flex;
+    margin: auto;}
+    .leaderboard .date {
+        width: 100vw;
+        top: 60px;
+        position: fixed;
+        text-align: center;
+        z-index: 100;
+        left: 50%;
+        transform: translateX(-50%);}
+    .leaderboard .chart {
+        width: 100vw;
+        padding: 5%;
+        position: relative;
+        top: 30px;
+        overflow-y: scroll;
+        left: 50%;
+        transform: translateX(-50%);}
+    .leaderboard .chart-table {
+        margin: 20px;}
+    .leaderboard .chart-header {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px;
+        margin-top: 20px;
+        padding: 0 5vw;}
+    .leaderboard .chart-table-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3%;
+        height: 60px;
+        border: 2px solid transparent;}
+        .leaderboard .chart-table .isGray {
+            background: #F2F2F2;}
+        .leaderboard .chart-table .topFive {
+            border: 5px solid #4EABDE;
+        }
 
 /*# sourceMappingURL=globals.css.map */
