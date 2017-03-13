@@ -182,4 +182,47 @@ a, a:hover, a:visited, a:link, a:active {
     .login-box input {
       border: none; }
 
+
+.leaderboard {
+    width: 100vw;
+    top: 60px;
+    display: flex;
+    margin: auto;}
+    .leaderboard .date {
+        width: 100vw;
+        top: 60px;
+        position: fixed;
+        text-align: center;
+        z-index: 100;
+        left: 50%;
+        transform: translateX(-50%);}
+    .leaderboard .chart {
+        width: 100vw;
+        padding: 5%;
+        position: relative;
+        top: 30px;
+        overflow-y: scroll;
+        left: 50%;
+        transform: translateX(-50%);}
+    .leaderboard .chart-table {
+        margin: 20px;}
+    .leaderboard .chart-header {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px;
+        margin-top: 20px;
+        padding: 0 5vw;}
+    .leaderboard .chart-table-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3%;
+        height: 60px;
+        border: 2px solid transparent;}
+        .leaderboard .chart-table .isGray {
+            background: #F2F2F2;}
+        .leaderboard .chart-table .topFive {
+            border: 5px solid #4EABDE;
+        }
+
 /*# sourceMappingURL=globals.css.map */

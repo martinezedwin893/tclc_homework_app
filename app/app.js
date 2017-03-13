@@ -5,6 +5,9 @@ require('./css/globals.css')
 import Nav from './components/nav.js'
 import Home from './components/home.js'
 import Login from './components/login.js'
+import Leaderboard from './components/leaderboard.js'
+import ClassRoom from './components/classroom.js'
+import Settings from './components/settings.js'
 
 class App extends Component {
 
@@ -15,7 +18,10 @@ render () {
         <Route path='/' component={Container}>
           <IndexRoute component={Home} />
           <Route path='login' component={Login} />
-        </Route>
+          <Route path='leaderboard' component={Leaderboard} />
+          <Route path='classroom' component={ClassRoom} />
+          <Route path='settings' component={Settings} />          
+        </Route>  
       </Router>
     )
   }

@@ -8,7 +8,7 @@ const Nav = () => (
       <IndexLink activeClassName='page-active' className="nav-link" to='/'>
         Home
       </IndexLink>
-      <IndexLink activeClassName='page-active' className="nav-link" to='/classroom'>
+      <IndexLink activeClassName='page-active' className="nav-link" to='/Classroom'>
         Classroom
       </IndexLink>
       <IndexLink activeClassName='page-active' className="nav-link" to='/Leaderboard'>
