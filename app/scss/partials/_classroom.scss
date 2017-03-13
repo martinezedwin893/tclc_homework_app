@@ -1,0 +1,115 @@
+.classroom{
+
+  width: 100vw;
+  position: relative;
+  top: 60px;
+  vertical-align: top;
+  display: flex;
+  overflow: hidden;
+
+  .left-panel {
+    overflow-y: scroll;
+    width: 70vw;
+    height: 90vh;
+    border-right: 1px solid $light-gray;
+    padding: 0 5%;
+    height: 95vh;
+
+    .graph {
+      position: relative;
+      padding: 0 3%;
+      margin-top: 50px;
+      width: 100%;
+      height: 400px;
+      border-left: 2px solid $light-gray;
+      border-bottom: 2px solid $light-gray;
+
+      &-bar{
+        position: absolute;
+        bottom: 0;
+        background: $primary-blue;
+        vertical-align: bottom;
+        text-align: center;
+
+        h4{
+          position: relative;
+          top: -30px;
+          color: $light-gray;
+        }
+      }
+    }
+
+    .x-axis {
+      padding: 0 3%;
+
+      .month {
+        text-align: center;
+        width: 100px;
+      }
+    }
+  }
+
+  .right-panel {
+    overflow-y: scroll;
+    width: 30vw;
+    height: 90vh;
+    position: relative;
+    top: 30px;
+    padding: 0 3vw;
+
+    .chart {
+      padding: 5%;
+      position: relative;
+      top: 30px;
+      overflow-y: scroll;
+
+      &-header{
+        display: flex;
+        padding: 0 5vw;
+
+        &-names{
+          padding-left: 3%;
+        }
+      }
+
+      &-table{
+        margin-top: 10px;
+
+        &-row{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 3%;
+          height: 60px;
+          border: 2px solid transparent;
+
+          &-completed {
+            color: $green;
+            border-color: $green;
+          }
+
+          &-notcompleted {
+            color: $red;
+            border-color: $red;
+          }
+
+          &-completed, &-notcompleted {
+            margin-right: 100px;
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 2px 5px;
+          }
+        }
+
+        &-row:hover{
+          border: 2px solid $primary-blue;
+        }
+
+        .isGray {
+          background: $table-gray;
+        }
+
+      }
+    }
+  }
+}

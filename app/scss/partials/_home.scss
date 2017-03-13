@@ -5,9 +5,13 @@
   vertical-align: top;
   display: flex;
 
+  .selected {
+    border: 2px solid $primary-blue;
+  }
+
   .left-panel {
     width: 70vw;
-    height: 90vh;
+    height: 95vh;
     border-right: 1px solid $light-gray;
 
     .date {
@@ -129,7 +133,7 @@
       .add-button {
         outline: none;
         padding: 0;
-        margin: 0;
+        margin: 30px 0;
         border: none;
         color: white;
         width: 100%;
@@ -148,9 +152,4 @@
       }
     }
   }
-}
-
-.selected {
-  border: 5px solid $primary-blue;
-  background-color: $primary-blue;
 }

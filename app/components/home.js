@@ -13,7 +13,8 @@ class Home extends Component {
         this.state = {
             user: {},
             activeUser: {"first": "Welcome", "last": "Back!"},
-            index: 0
+            index: 0,
+            test: 0
         };
     }
 
@@ -33,21 +34,52 @@ class Home extends Component {
         });
     }
 
+    componentDidMount(){
+
+      let currentUsers = this.state.user;
+      let date = getDate();
+      let yearMonth = date[0] + "-" + date[1];
+
+      for (let index in currentUsers) {
+
+        //If points don't exist, push an empty object.
+        if(!("points" in currentUsers[index])){
+          currentUsers[index].points = {};
+        }
+
+        //If current month doesn't exist, push one.
+        if (!(yearMonth in currentUsers[index].points)) {
+            currentUsers[index].points[yearMonth] = {
+                "completedHomework": 0,
+                "month": "March",
+                "totalPoints": 0,
+                "year": 2017
+            };
+        }
+
+      }
+
+      this.setState({
+          user: currentUsers
+      });
+    }
+
     clickRow(index) {
         console.log(index);
         let currentUsers = this.state.user;
         let activeUser = currentUsers[index];
-        document.getElementById(index).classList.add("selected");
+        //document.getElementById(index).classList.add("selected");
         console.log(document.getElementById(index).classList);
 
         this.setState({
             activeUser: activeUser,
             index: index
         });
+
         console.log(activeUser);
     }
 
-    addValue() {
+    addValue(isHomework) {
         let date = getDate();
         let yearMonth = date[0] + "-" + date[1];
         let value = document.getElementById("input-add").value;
@@ -60,23 +92,24 @@ class Home extends Component {
             return;
         }
 
-        if (!(yearMonth in currentUsers[index].points)) {
-            currentUsers[index].points[yearMonth] = {
-                "completedHomework": 0,
-                "month": "March",
-                "totalPoints": 0,
-                "year": 2017
-            };
-        }
 
         if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
             currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
         }
 
         if (value > 0) {
-            currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
-            currentUsers[index].points[yearMonth].completedHomework += value;
+
+            if(isHomework){
+              currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
+              currentUsers[index].points[yearMonth].completedHomework += value;
+            }
+            else {
+              currentUsers[index].points[yearMonth][date[2]]["V"] += value;
+            }
+
             currentUsers[index].points[yearMonth].totalPoints += value;
+            currentUsers[index].totalPoints += value;
+            currentUsers[index].jumps += value;
         }
 
         this.setState({
@@ -98,6 +131,7 @@ class Home extends Component {
         let date = getDate();
         let yearMonth = date[0] + "-" + date[1];
         let usersArray = [];
+        let count = Object.keys(currentUsers).length;
 
         for (let index in currentUsers) {
 
@@ -111,7 +145,7 @@ class Home extends Component {
             }
 
             //If condition to switch colors
-            if (index % 2 == 0) {
+            if (count % 2 == 1) {
                 usersArray.push(
                     <div onClick={this.clickRow.bind(this, index)} className="chart-table-row isGray" key={index}
                          id={index}>
@@ -125,6 +159,8 @@ class Home extends Component {
                         {homeworkCompleted}
                     </div>);
             }
+
+            count++;
         }
 
         return (
@@ -142,6 +178,7 @@ class Home extends Component {
         let day = d.getDate();
         let month = months[d.getMonth()];
         let year = d.getFullYear();
+        let isHomework = true;
 
         return (
             <div className="home">
@@ -149,7 +186,7 @@ class Home extends Component {
                     <div className="date">{weekday}, {month} {day}, {year}</div>
                     <div className="chart">
                         <div className="chart-header">
-                            <div className="chart-header-names">Names</div>
+                            <div className="chart-header-names">Name</div>
                             <div className="chart-header-completed"> Homework Completed</div>
                         </div>
                         {this.renderTable()}
@@ -168,7 +205,12 @@ class Home extends Component {
                             <button onClick={this.increment.bind(this)} className="points-buttons-button">+</button>
                         </div>
                         <h4>Reason</h4>
-                        <button type="button" onClick={this.addValue.bind(this)} className="add-button">Add</button>
+                        <form action="">
+                          <input type="radio" name="gender" value="male" defaultChecked onClick={()=>{isHomework = true;}}/>  Homework
+                          <br/>
+                          <input type="radio" name="gender" value="female" onClick={()=>{isHomework = false;}} />  Volunteering
+                        </form>
+                        <button type="button" onClick={this.addValue.bind(this,isHomework)} className="add-button">Add</button>
                     </div>
                 </div>
             </div>

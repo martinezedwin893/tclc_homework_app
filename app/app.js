@@ -20,8 +20,8 @@ render () {
           <Route path='login' component={Login} />
           <Route path='leaderboard' component={Leaderboard} />
           <Route path='classroom' component={ClassRoom} />
-          <Route path='settings' component={Settings} />          
-        </Route>  
+          <Route path='settings' component={Settings} />
+        </Route>
       </Router>
     )
   }
