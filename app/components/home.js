@@ -37,8 +37,6 @@ class Home extends Component {
     console.log(index);
     let currentUsers = this.state.user;
     let activeUser = currentUsers[index];
-    document.getElementById(index).classList.add("selected");
-    console.log(document.getElementById(index).classList);
 
     this.setState({
       activeUser: activeUser,

@@ -113,7 +113,8 @@ a, a:hover, a:visited, a:link, a:active {
       transform: translateY(1px); }
 
 .selected {
-  border: 5px solid #61BBE3; }
+  border: 5px solid #61BBE3;
+  background-color: #61BBE3; }
 
 .navigation {
   position: fixed;
