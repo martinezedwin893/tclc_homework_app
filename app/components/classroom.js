@@ -140,7 +140,7 @@ class ClassRoom extends Component {
           <div className="graph">
             <div className="graph-data">
               <div className="graph-num"></div>
-              <div className="graph-bar" style={{width: 100, height: barHeight}}>
+              <div className="graph-bar" style={{width: 100, height: monthNum}}>
                 <h4>{monthNum}</h4>
               </div>
             </div>
