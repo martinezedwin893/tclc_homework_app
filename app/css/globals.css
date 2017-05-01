@@ -299,11 +299,13 @@ a, a:hover, a:visited, a:link, a:active {
 
     .classroom .left-panel .x-axis {
       padding: 0 3%;
+      overflow: hidden;
     }
 
     .classroom .left-panel .x-axis .month {
       text-align: center;
-      width: 100px;
+      width: 125px;
+      float: left;
     }
 
   /* Right panel */
