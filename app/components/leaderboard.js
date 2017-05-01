@@ -71,17 +71,21 @@ class Leaderboard extends Component {
         if (index % 2 == 0) {
             return (
                 <div className="chart-table-row isGray" key={index} id={index}>
-                    <div className="chart-table-row-name">{index + 1}. {student.name}</div>
-                    <div className="chart-table-row-level">{student.level}</div>
-                    <div className="chart-table-row-total-points">{student.totalPoints}</div>
+                    <div className="chart-table-row-rank">{index + 1}</div>
+                    <div className="char-table-row-name">{student.name}</div>
+                    <div className="char-table-row-homework">1</div>
+                    <div className="char-table-row-volunteering">1</div>
+                    <div className="chart-table-row-total">{student.totalPoints}</div>
                 </div>
             );
         } else {
             return (
                 <div className="chart-table-row" key={index} id={index}>
-                    <div className="chart-table-row-name">{index + 1}. {student.name}</div>
-                    <div className="chart-table-row-level">{student.level}</div>
-                    <div className="chart-table-row-total-points">{student.totalPoints}</div>
+                    <div className="chart-table-row-rank">{index + 1}</div>
+                    <div className="char-table-row-name">{student.name}</div>
+                    <div className="char-table-row-homework">1</div>
+                    <div className="char-table-row-volunteering">1</div>
+                    <div className="chart-table-row-total">{student.totalPoints}</div>
                 </div>
             );
         }
@@ -96,9 +100,11 @@ class Leaderboard extends Component {
                 <h2 className="date">{month} {year}</h2>
                 <div className="chart">
                     <div className="chart-header">
-                        <div className="chart-header-name">Name</div>
-                        <div className="chart-header-level">Level</div>
-                        <div className="chart-header-total-points">Total Points</div>
+                        <div className="chart-header-rank"><b>Rank</b></div>
+                        <div className="chart-header-name"><b>Name</b></div>
+                        <div className="chart-header-homework"><b>Homework</b></div>
+                        <div className="chart-header-volunteering"><b>Volunteering</b></div>
+                        <div className="chart-header-total"><b>Total Points</b></div>
                     </div>
                     {this.renderTable()}
                 </div>
