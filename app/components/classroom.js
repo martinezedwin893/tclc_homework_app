@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, IndexLink, IndexRoute, hashHistory, browserHistory } from 'react-router';
-import {getDate, getYear, getMonth, getAllStudentsLeaderboard} from './firebase.js';
+import {
+  Router,
+  Route,
+  Link,
+  IndexLink,
+  IndexRoute,
+  hashHistory,
+  browserHistory
+} from 'react-router';
+import {
+  getDate,
+  getYear,
+  getMonth,
+  getAllStudentsLeaderboard
+} from './firebase.js';
 
 class ClassRoom extends Component {
 
@@ -99,8 +112,6 @@ class ClassRoom extends Component {
     let date = getYear() + "-" + getMonth();
     console.log(currentUsers[index].points[date].totalPoints);
     return currentUsers[index].points[date].totalPoints;
-
-
   }
 
   render() {
@@ -118,11 +129,11 @@ class ClassRoom extends Component {
     let monthNum = 0;
 
     if(selected.first == "Welcome"){
-      top = "Average # of Students Completing";
-      bottom = "Homework Each Month";
+      top = "Average # of Points Earned"
+      bottom = ""
       monthNum = this.getAllPoints();
-    }
-    else{
+
+    } else{
       top = selected.first;
       bottom = selected.last;
       monthNum = this.getPoints();
@@ -133,30 +144,43 @@ class ClassRoom extends Component {
 
     return (
       <div className="classroom">
-
+      <div>
+        <h4
+        style={{
+          writing-mode: vertical-rl;
+          text-orientation: upright;
+        }}>points</h4>
+      </div>
         <div className="left-panel">
-          <h1>{top}</h1>
-          <h1>{bottom}</h1>
+
+          <h1>Homework Completed for Each Month</h1>
+          <h2>{top} {bottom}</h2>
+
+
+
           <div className="graph">
             <div className="graph-data">
+
               <div className="graph-num"></div>
               <div className="graph-bar" style={{width: 100, height: monthNum}}>
                 <h4>{monthNum}</h4>
               </div>
+
             </div>
           </div>
+
           <div className="x-axis">
             <div className="month">
               <h4>March</h4>
             </div>
           </div>
+
         </div>
 
         <div className="right-panel">
           <div className="chart-header-names">Name</div>
           {this.renderTable()}
         </div>
-
       </div>
     )
   }
