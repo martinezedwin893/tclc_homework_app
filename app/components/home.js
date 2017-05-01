@@ -15,7 +15,7 @@ class Home extends Component {
             activeUser: {"first": "Welcome", "last": "Back!"},
             index: 0,
             test: 0,
-            reset: 0
+            reset: 0 
         };
     }
 
