@@ -17,6 +17,9 @@ import {
 
 class ClassRoom extends Component {
 
+  /*
+   * set up classroom
+   */
   constructor(props, context) {
       super(props);
       this.context = context;
@@ -29,6 +32,9 @@ class ClassRoom extends Component {
       };
   }
 
+  /*
+   * set up Firebase
+   */
   componentWillMount() {
       let Rebase = require('re-base');
       let base = Rebase.createClass({
@@ -45,11 +51,14 @@ class ClassRoom extends Component {
       });
   }
 
+  /*
+   * actions that occur when user clicks on a row
+   */
   clickRow(index) {
       console.log(index);
       let currentUsers = this.state.user;
       let activeUser = currentUsers[index];
-      //document.getElementById(index).classList.add("selected");
+      // document.getElementById(index).classList.add("selected");
       console.log(document.getElementById(index).classList);
 
       this.setState({
@@ -60,7 +69,9 @@ class ClassRoom extends Component {
       console.log(activeUser);
   }
 
-  /*Renders table with names*/
+  /*
+   * Renders table with names
+   */
   renderTable() {
       let currentUsers = this.state.user;
       let date = getDate();
@@ -72,16 +83,24 @@ class ClassRoom extends Component {
 
           let currentUser = currentUsers[index];
 
-          //If condition to switch colors
+          // If condition to switch colors
           if (count % 2 == 1) {
               usersArray.push(
-                  <div onClick={this.clickRow.bind(this, index)} className="chart-table-row isGray" key={index}
-                       id={index}>
+                  <div
+                    onClick={this.clickRow.bind(this, index)}
+                    className="chart-table-row isGray"
+                    key={index}
+                    id={index}>
                       <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
                   </div>);
+
           } else {
               usersArray.push(
-                  <div onClick={this.clickRow.bind(this, index)} className="chart-table-row" key={index} id={index}>
+                  <div
+                    onClick={this.clickRow.bind(this, index)}
+                    className="chart-table-row"
+                    key={index}
+                    id={index}>
                       <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
                   </div>);
           }
@@ -94,6 +113,9 @@ class ClassRoom extends Component {
       );
   }
 
+  /*
+   * gets total points of all students
+   */
   getAllPoints(){
     let pArray = getAllStudentsLeaderboard(this.state.user);
     let points = 0;
@@ -105,6 +127,9 @@ class ClassRoom extends Component {
     return points;
   }
 
+  /*
+   * gets points of an individual student
+   */
   getPoints(){
     let currentUsers = this.state.user;
     let activeUser = this.state.activeUser;
@@ -114,13 +139,17 @@ class ClassRoom extends Component {
     return currentUsers[index].points[date].totalPoints;
   }
 
+  /*
+   * render the Classroom page
+   */
   render() {
-    let barHeight = 0;
+    let barHeightHomework = 0;
+    let barHeightVolunteer = 0;
     let increment = 0;
 
     if(this.getAllPoints()){
       increment = 400/(this.getAllPoints()*3);
-      barHeight = increment * this.getAllPoints();
+      barHeightHomework = increment * this.getAllPoints();
     }
 
     let selected = this.state.activeUser;
@@ -138,24 +167,19 @@ class ClassRoom extends Component {
       bottom = selected.last;
       monthNum = this.getPoints();
       increment = 400/(this.getPoints()*7);
-      barHeight = increment * this.getPoints();
-      console.log(barHeight);
+      barHeightHomework = increment * this.getPoints();
+      console.log(barHeightHomework);
     }
 
     return (
       <div className="classroom">
       <div>
-        <h4
-        style={{
-
-        }}>points</h4>
+        <h4>points</h4>
       </div>
         <div className="left-panel">
 
           <h1>Homework Completed for Each Month</h1>
           <h2>{top} {bottom}</h2>
-
-
 
           <div className="graph">
             <div className="graph-data">
@@ -171,6 +195,14 @@ class ClassRoom extends Component {
           <div className="x-axis">
             <div className="month">
               <h4>March</h4>
+            </div>
+
+            <div className="month">
+              <h4>April</h4>
+            </div>
+
+            <div className="month">
+              <h4>May</h4>
             </div>
           </div>
 
