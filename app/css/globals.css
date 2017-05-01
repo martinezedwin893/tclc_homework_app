@@ -187,18 +187,26 @@ a, a:hover, a:visited, a:link, a:active {
   width: 100vw;
   top: 60px;
   margin: auto; }
+  .leaderboard .chart-table-row-rank {
+    width: 100px;}
   .leaderboard .chart-table-row-name {
-    width: 200px; }
-  .leaderboard .chart-table-row-level {
-    width: 200px; }
-  .leaderboard .chart-table-row-total-points {
-    width: 200px; }
+    width: 100px; }
+  .leaderboard .chart-table-row-hw {
+    width: 100px; }
+  .leaderboard .chart-table-row-volunteering {
+    width: 100px; }
+  .leaderboard .chart-table-row-total {
+    width: 100px; }
+  .leaderboard .chart-header-rank{
+    width: 100px; }
   .leaderboard .chart-header-name {
-    width: 200px; }
-  .leaderboard .chart-header-level {
-    width: 200px; }
-  .leaderboard .chart-header-total-points {
-    width: 200px; }
+    width: 100px; }
+  .leaderboard .chart-header-homework {
+    width: 100px; }
+  .leaderboard .chart-header-volunteering {
+    width: 100px; }
+  .leaderboard .chart-header-total {
+    width: 100px; }
 
 .leaderboard .date {
   width: 100vw;
@@ -230,6 +238,7 @@ a, a:hover, a:visited, a:link, a:active {
 
 .leaderboard .chart-table-row {
   display: flex;
+  /* Adjust the space between content */
   justify-content: space-between;
   align-items: center;
   padding: 3%;
@@ -240,7 +249,7 @@ a, a:hover, a:visited, a:link, a:active {
   background: #F2F2F2; }
 
 .leaderboard .chart-table .topFive {
-  border: 5px solid #4EABDE; }
+  border: 3px solid #4EABDE; }
 
 
 /*
