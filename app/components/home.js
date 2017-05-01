@@ -103,6 +103,10 @@ class Home extends Component {
             currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
         }
 
+        if (value < 0) {
+          window.alert("Please enter a positive number.");
+        }
+
         if (value > 0) {
 
             if(isHomework){
