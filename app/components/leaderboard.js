@@ -86,7 +86,7 @@ class Leaderboard extends Component {
                     <div className="char-table-row-homework">1</div>
                     <div className="char-table-row-volunteering">1</div>
                     <div className="chart-table-row-total">{student.totalPoints}</div>
-                </div>
+                </div> 
             );
         }
     }
