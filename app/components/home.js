@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import {Router, Route, Link, IndexLink, IndexRoute, hashHistory, browserHistory} from 'react-router';
+import Popup from 'react-popup';
+import ReactDOM from 'react-dom'
+
+import Modal from 'boron/DropModal';
 
 import {getDate} from './firebase.js';
 
+
+
 class Home extends Component {
+
+
     mixins: [ReactFireMixin];
 
     constructor(props, context) {
@@ -15,8 +23,15 @@ class Home extends Component {
             activeUser: {"first": "Welcome", "last": "Back!"},
             index: 0,
             test: 0,
-            reset: 0 
+            reset: 0,
         };
+    }
+
+    showModal(){
+      this.refs.modal.show();
+    }
+    hideModal(){
+        this.refs.modal.hide();
     }
 
     componentWillMount() {
@@ -90,6 +105,8 @@ class Home extends Component {
         let value = document.getElementById("input-add").value;
 
         value = parseInt(value);
+
+
         let currentUsers = this.state.user;
         let activeUser = this.state.activeUser;
         let index = this.state.index;
@@ -148,6 +165,11 @@ class Home extends Component {
 
     increment() {
         document.getElementById("input-add").value++;
+    }
+
+
+    successAlert() {
+        window.alert("SUCCESS");
     }
 
 
@@ -233,12 +255,19 @@ class Home extends Component {
                           <input type="radio" name="gender" value="female" onClick={()=>{isHomework = false;}} />  Volunteering
                         </form>
                         <button type="button" onClick={this.addValue.bind(this,isHomework)} className="add-button">Add</button>
-                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)}>Reset Points</button></center>
+                        <Modal ref="modal">
+                          <center><h2> points successfully added!</h2></center>
+                        </Modal>
+                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework), this.showModal.bind(this)}>Reset Points</button></center>
+                        <Modal ref="modal">
+                          <center><h2>Points successfully reset!</h2></center>
+                        </Modal>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
 
 export default Home
