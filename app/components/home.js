@@ -14,7 +14,8 @@ class Home extends Component {
             user: {},
             activeUser: {"first": "Welcome", "last": "Back!"},
             index: 0,
-            test: 0
+            test: 0,
+            reset: 0
         };
     }
 
@@ -51,7 +52,7 @@ class Home extends Component {
         if (!(yearMonth in currentUsers[index].points)) {
             currentUsers[index].points[yearMonth] = {
                 "completedHomework": 0,
-                "month": "March",
+                "month": "April",
                 "totalPoints": 0,
                 "year": 2017
             };
@@ -79,10 +80,15 @@ class Home extends Component {
         console.log(activeUser);
     }
 
+    isReset() {
+      this.state.reset = 1;
+    }
+
     addValue(isHomework) {
         let date = getDate();
         let yearMonth = date[0] + "-" + date[1];
         let value = document.getElementById("input-add").value;
+
         value = parseInt(value);
         let currentUsers = this.state.user;
         let activeUser = this.state.activeUser;
@@ -112,6 +118,21 @@ class Home extends Component {
             currentUsers[index].jumps += value;
         }
 
+        // reset points for student
+        else if (this.state.reset == 1) {
+
+          this.state.reset = 0;
+          currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
+          currentUsers[index].points[yearMonth].completedHomework =0;
+
+          currentUsers[index].points[yearMonth][date[2]]["V"] =0;
+
+
+          currentUsers[index].points[yearMonth].totalPoints =0;
+          currentUsers[index].totalPoints =0;
+          currentUsers[index].jumps =0;
+
+        }
         this.setState({
             user: currentUsers
         });
@@ -124,6 +145,7 @@ class Home extends Component {
     increment() {
         document.getElementById("input-add").value++;
     }
+
 
     /*Renders table with names*/
     renderTable() {
@@ -193,24 +215,21 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="right-panel">
-                    <h1>{selected.first}</h1>
-                    <h1>{selected.last}</h1>
+                    <h1>{selected.first} {selected.last}</h1>
                     <div className="points">
                         <h4>Add Points</h4>
-                        <div className="points-buttons">
-                            <button type="button" onClick={this.decrement.bind(this)} className="points-buttons-button">
-                                -
-                            </button>
-                            <input id="input-add" className="points-buttons-input" type="number" placeholder="0"/>
-                            <button onClick={this.increment.bind(this)} className="points-buttons-button">+</button>
-                        </div>
-                        <h4>Reason</h4>
+                          <div className="points-buttons">
+                                <input id="input-add" className="points-buttons-input" type="number" placeholder="0"/>
+                                <button onClick={this.increment.bind(this)} className="points-buttons-button">+</button>
+                          </div>
+                        <h4>Category</h4>
                         <form action="">
                           <input type="radio" name="gender" value="male" defaultChecked onClick={()=>{isHomework = true;}}/>  Homework
                           <br/>
                           <input type="radio" name="gender" value="female" onClick={()=>{isHomework = false;}} />  Volunteering
                         </form>
                         <button type="button" onClick={this.addValue.bind(this,isHomework)} className="add-button">Add</button>
+                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)}>Reset Points</button></center>
                     </div>
                 </div>
             </div>
