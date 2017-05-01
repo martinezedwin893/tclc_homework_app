@@ -147,8 +147,7 @@ class ClassRoom extends Component {
       <div>
         <h4
         style={{
-          writing-mode: vertical-rl;
-          text-orientation: upright;
+
         }}>points</h4>
       </div>
         <div className="left-panel">
