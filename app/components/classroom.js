@@ -145,11 +145,7 @@ class ClassRoom extends Component {
     return (
       <div className="classroom">
       <div>
-        <h4
-        style={{
-          writing-mode: vertical-rl;
-          text-orientation: upright;
-        }}>points</h4>
+        <h4>points</h4>
       </div>
         <div className="left-panel">
 
