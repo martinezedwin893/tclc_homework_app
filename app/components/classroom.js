@@ -81,9 +81,11 @@ class ClassRoom extends Component {
   renderXAxis() {
     let totalMonths = 6;
     let monthsArray = [];
-    // mod = ()(n % m) + m) % m
+
+    // mod = ((n % m) + m) % m
     let currentMonth = (((getMonth() - totalMonths) % 12) + 12) % 12;
 
+    // print the current and previous 5 months
     for (var index = 0; index < totalMonths; index++) {
       monthsArray.push(
         <div className = "month">
@@ -193,17 +195,17 @@ class ClassRoom extends Component {
     let selected = this.state.activeUser;
     let top = "";
     let bottom = "";
-    let monthNum = 0;
+    let numPoints = 0;
 
     if(selected.first == "Welcome"){
       top = "Average # of Points Earned"
       bottom = ""
-      monthNum = this.getAllPoints();
+      numPoints = this.getAllPoints();
 
     } else{
       top = selected.first;
       bottom = selected.last;
-      monthNum = this.getPoints();
+      numPoints = this.getPoints();
       increment = 400/(this.getPoints()*7);
       barHeightHomework = increment * this.getPoints();
       console.log(barHeightHomework);
@@ -229,10 +231,9 @@ class ClassRoom extends Component {
               <div
                 className = "graph-bar"
                 style = {{
-                  height: monthNum
+                  height: numPoints
                 }}>
-
-                <h4>{monthNum}</h4>
+                <h4>{numPoints}</h4>
               </div>
 
             </div>
