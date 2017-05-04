@@ -27,7 +27,10 @@ class ClassRoom extends Component {
 
       this.state = {
           user: {},
-          activeUser: {"first": "Welcome", "last": "Back!"},
+          activeUser: {
+            "first": "Welcome",
+            "last": "Back!"
+          },
           index: 0,
           test: 0
       };
@@ -74,7 +77,7 @@ class ClassRoom extends Component {
    * Renders table with names
    */
   renderTable() {
-      let currentUsers = this.state.user;
+      let currentUsers = this.state.user; // should be empty initially
       let date = getDate();
       let yearMonth = date[0] + "-" + date[1];
       let usersArray = [];
