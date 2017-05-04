@@ -12,6 +12,8 @@ import {
   getDate,
   getYear,
   getMonth,
+  getMonthName,
+  getCurrentMonthName,
   getAllStudentsLeaderboard
 } from './firebase.js';
 
@@ -74,10 +76,36 @@ class ClassRoom extends Component {
   }
 
   /*
+   * Renders x-axis
+   */
+  renderXAxis() {
+    let totalMonths = 6;
+    let monthsArray = [];
+    // mod = ()(n % m) + m) % m
+    let currentMonth = (((getMonth() - totalMonths) % 12) + 12) % 12;
+
+    for (var index = 0; index < totalMonths; index++) {
+      monthsArray.push(
+        <div className = "month">
+          <h4>{getMonthName(currentMonth)}</h4>
+        </div>
+      );
+
+      currentMonth = (currentMonth + 1) % 12;
+    }
+
+    return(
+      <div className = "x-axis">
+        {monthsArray}
+      </div>
+    );
+  }
+
+  /*
    * Renders table with names
    */
   renderTable() {
-      let currentUsers = this.state.user; // should be empty initially
+      let currentUsers = this.state.user;
       let date = getDate();
       let yearMonth = date[0] + "-" + date[1];
       let usersArray = [];
@@ -91,21 +119,25 @@ class ClassRoom extends Component {
           if (count % 2 == 1) {
               usersArray.push(
                   <div
-                    onClick={this.clickRow.bind(this, index)}
-                    className="chart-table-row isGray"
-                    key={index}
-                    id={index}>
-                      <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
+                    onClick = {this.clickRow.bind(this, index)}
+                    className = "chart-table-row isGray"
+                    key = {index}
+                    id = {index}>
+                      <div className = "chart-table-row-name">
+                        {currentUser.first} {currentUser.last}
+                      </div>
                   </div>);
 
           } else {
               usersArray.push(
                   <div
-                    onClick={this.clickRow.bind(this, index)}
-                    className="chart-table-row"
-                    key={index}
-                    id={index}>
-                      <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
+                    onClick = {this.clickRow.bind(this, index)}
+                    className = "chart-table-row"
+                    key = {index}
+                    id = {index}>
+                      <div className = "chart-table-row-name">
+                        {currentUser.first} {currentUser.last}
+                      </div>
                   </div>);
           }
 
@@ -113,7 +145,9 @@ class ClassRoom extends Component {
       }
 
       return (
-          <div className="chart-table">{usersArray}</div>
+          <div className = "chart-table">
+            {usersArray}
+          </div>
       );
   }
 
@@ -176,47 +210,40 @@ class ClassRoom extends Component {
     }
 
     return (
-      <div className="classroom">
-        <div className="left-panel">
+      <div className = "classroom">
+        <div className = "left-panel">
 
           <h1>Homework Completed for Each Month</h1>
           <h2>{top} {bottom}</h2>
 
-          <div className="label">
+          <div className = "label">
             <img src = {'../images/Points_Label.png'} />
           </div>
 
-          <div className="graph">
+          <div className = "graph">
+            <div className = "graph-data">
 
-            <div className="graph-data">
+              <div className = "graph-num">
+              </div>
 
-              <div className="graph-num"></div>
+              <div
+                className = "graph-bar"
+                style = {{
+                  height: monthNum
+                }}>
 
-              <div className="graph-bar" style={{width: 100, height: monthNum}}>
                 <h4>{monthNum}</h4>
               </div>
 
             </div>
           </div>
 
-          <div className="x-axis">
-            <div className="month">
-              <h4>March</h4>
-            </div>
-
-            <div className="month">
-              <h4>April</h4>
-            </div>
-
-            <div className="month">
-              <h4>May</h4>
-            </div>
-          </div>
+          {this.renderXAxis()}
 
         </div>
 
-        <div className="right-panel">
-          <div className="chart-header-names">Name</div>
+        <div className = "right-panel">
+          <div className = "chart-header-names">Name</div>
           {this.renderTable()}
         </div>
       </div>

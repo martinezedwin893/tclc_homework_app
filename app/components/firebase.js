@@ -1,4 +1,6 @@
-// Returns array of all students with array of homework done for each month
+/*
+ * Returns array of all students with array of homework done for each month
+ */
 export function getAllStudentsCompletedHomework(students) {
     let soln = [];
     let temp = objectToArray(students);
@@ -10,7 +12,10 @@ export function getAllStudentsCompletedHomework(students) {
     return soln;
 }
 
-// Returns student object with array of days that indicate (true/ false) if a student has done the work for each day of the month
+/*
+ * Returns student object with array of days that indicate (true/ false)
+ * if a student has done the work for each day of the month
+ */
 export function getStudentsCompletedHomework(student) {
     let soln = [];
     let month = getMonth();
@@ -47,7 +52,10 @@ export function getStudentsCompletedHomework(student) {
     };
 }
 
-// Returns array of all students' total points for the passed in month/ year; Sorted by descending totalPoints
+/*
+ * Returns array of all students' total points for the passed in month/ year;
+ * Sorted by descending totalPoints
+ */
 export function getAllStudentsLeaderboard(students) {
     let soln = [];
     let temp = objectToArray(students);
@@ -63,7 +71,9 @@ export function getAllStudentsLeaderboard(students) {
     return soln;
 }
 
-// Returns student object with name, level, and totalPoints for the month/year
+/*
+ * Returns student object with name, level, and totalPoints for the month/year
+ */
 export function getStudentLeaderboardData(student) {
     if (student == null) return;
     let date = getYear() + "-" + getMonth();
@@ -75,7 +85,9 @@ export function getStudentLeaderboardData(student) {
     };
 }
 
-// Returns array of all students with completed homework each month
+/*
+ * Returns array of all students with completed homework each month
+ */
 export function getAllStudentsHomeworkPerMonth(students) {
     let soln = [];
     let temp = objectToArray(students);
@@ -87,7 +99,9 @@ export function getAllStudentsHomeworkPerMonth(students) {
     return soln;
 }
 
-// Return number of completed homework each month for a student
+/*
+ * Return number of completed homework each month for a student
+ */
 export function getStudentHomeworkPerMonth(student) {
     if (student == null || student.points == null) return;
 
@@ -109,7 +123,9 @@ export function getStudentHomeworkPerMonth(student) {
     return soln;
 }
 
-// Returns boolean if the username and password combination exists
+/*
+ * Returns boolean if the username and password combination exists
+ */
 export function validateLoginAll(students, username, password) {
     let temp = objectToArray(students);
     for (let i = 0; i < temp.length; i++) {
@@ -121,11 +137,14 @@ export function validateLoginAll(students, username, password) {
     return false;
 }
 
+
 export function validateLogin(student, username, password) {
     return student != null && student.username == username && student.password == password;
 }
 
-// Returns the year, month, and date in an array in that order
+/*
+ * Returns the year, month, and date in an array in that order
+ */
 export function getDate() {
     let d = new Date();
     let date = d.getDate();
@@ -150,29 +169,59 @@ function objectToArray(object) {
     return soln;
 }
 
-// Returns the year as last two (e.g. 17)
+/*
+ * Returns the year as last two (e.g. 17)
+ */
 export function getYear() {
     return getDate()[0];
 }
 
-// Returns the year as four digits (e.g. 2017)
+/*
+ * Returns the year as four digits (e.g. 2017)
+ */
 export function getFourDigitYear() {
     return getYear() + 2000;
 }
 
-// Returns the month number (e.g. March = 3)
+/*
+ * Returns the month number (e.g. March = 3)
+ */
 export function getMonth() {
     return getDate()[1];
 }
 
-let monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+/*
+ * Array of full month names, indexed from 0 to 11
+ */
+let monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
 ];
 
-// Returns the month name (e.g. March)
+/*
+ * Returns the month name (e.g. March)
+ */
 export function getCurrentMonthName() {
     return monthNames[getMonth() - 1];
 }
+
+/*
+ * Returns the month name based on index
+ */
+export function getMonthName(monthIndex) {
+  return monthNames[monthIndex];
+}
+
 
 // FirebasePostUtils
 /*
