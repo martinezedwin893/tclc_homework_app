@@ -272,15 +272,24 @@ a, a:hover, a:visited, a:link, a:active {
     padding: 0 5%;
     height: 95vh;
   }
+    .classroom .left-panel .label {
+      margin-top: 50px;
+      width: 45px;
+      height: 400px;
+      float: left;
+      display: inline-block;
+      padding: 0;
+    }
 
     .classroom .left-panel .graph {
       position: relative;
       padding: 0 3%;
       margin-top: 50px;
-      width: 100%;
+      width: 70%;
       height: 400px;
       border-left: 2px solid #D8D8D8;
       border-bottom: 2px solid #D8D8D8;
+      display: inline-block;
     }
 
     .classroom .left-panel .graph-bar {
@@ -300,6 +309,8 @@ a, a:hover, a:visited, a:link, a:active {
     .classroom .left-panel .x-axis {
       padding: 0 3%;
       overflow: hidden;
+      position: relative;
+      margin-left: 38px;
     }
 
     .classroom .left-panel .x-axis .month {

@@ -15,6 +15,7 @@ import {
   getAllStudentsLeaderboard
 } from './firebase.js';
 
+
 class ClassRoom extends Component {
 
   /*
@@ -173,18 +174,21 @@ class ClassRoom extends Component {
 
     return (
       <div className="classroom">
-      <div>
-        <h4>points</h4>
-      </div>
         <div className="left-panel">
 
           <h1>Homework Completed for Each Month</h1>
           <h2>{top} {bottom}</h2>
 
+          <div className="label">
+            <img src = {'../images/Points_Label.png'} />
+          </div>
+
           <div className="graph">
+
             <div className="graph-data">
 
               <div className="graph-num"></div>
+
               <div className="graph-bar" style={{width: 100, height: monthNum}}>
                 <h4>{monthNum}</h4>
               </div>
