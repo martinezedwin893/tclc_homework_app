@@ -191,11 +191,11 @@ a, a:hover, a:visited, a:link, a:active {
 .leaderboard .chart-table-row-rank {
   width: 200px;}
 .leaderboard .chart-table-row-name {
-  width: 250px; }
+  width: 325px; }
 .leaderboard .chart-table-row-hw {
-  width: 225px; }
+  width: 275px; }
 .leaderboard .chart-table-row-volunteering {
-  width: 225px; }
+  width: 250px; }
 .leaderboard .chart-table-row-total {
   width: 100px;}
 .leaderboard .chart-header-rank{
@@ -240,6 +240,7 @@ a, a:hover, a:visited, a:link, a:active {
 .leaderboard .chart-table-row {
   display: flex;
   /* Adjust the space between content */
+  justify-content: space-between;
   align-items: center;
   padding: 3%;
   height: 60px;
