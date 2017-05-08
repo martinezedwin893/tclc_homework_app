@@ -187,26 +187,27 @@ a, a:hover, a:visited, a:link, a:active {
   width: 100vw;
   top: 60px;
   margin: auto; }
-  .leaderboard .chart-table-row-rank {
-    width: 100px;}
-  .leaderboard .chart-table-row-name {
-    width: 100px; }
-  .leaderboard .chart-table-row-hw {
-    width: 100px; }
-  .leaderboard .chart-table-row-volunteering {
-    width: 100px; }
-  .leaderboard .chart-table-row-total {
-    width: 100px; }
-  .leaderboard .chart-header-rank{
-    width: 100px; }
-  .leaderboard .chart-header-name {
-    width: 100px; }
-  .leaderboard .chart-header-homework {
-    width: 100px; }
-  .leaderboard .chart-header-volunteering {
-    width: 100px; }
-  .leaderboard .chart-header-total {
-    width: 100px; }
+
+.leaderboard .chart-table-row-rank {
+  width: 200px;}
+.leaderboard .chart-table-row-name {
+  width: 250px; }
+.leaderboard .chart-table-row-hw {
+  width: 225px; }
+.leaderboard .chart-table-row-volunteering {
+  width: 225px; }
+.leaderboard .chart-table-row-total {
+  width: 100px;}
+.leaderboard .chart-header-rank{
+  width: 75px; }
+.leaderboard .chart-header-name {
+  width: 75px; }
+.leaderboard .chart-header-homework {
+  width: 100px; }
+.leaderboard .chart-header-volunteering {
+  width: 100px; }
+.leaderboard .chart-header-total {
+  width: 100px; }
 
 .leaderboard .date {
   width: 100vw;
@@ -239,7 +240,6 @@ a, a:hover, a:visited, a:link, a:active {
 .leaderboard .chart-table-row {
   display: flex;
   /* Adjust the space between content */
-  justify-content: space-between;
   align-items: center;
   padding: 3%;
   height: 60px;
