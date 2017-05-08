@@ -320,12 +320,12 @@ a, a:hover, a:visited, a:link, a:active {
 
     .classroom .left-panel .month {
       text-align: center;
-      width: 125px;
+      width: 110px;
       float: left;
     }
 
     .classroom .left-panel .month h4 {
-      font-size: 15px; 
+      font-size: 16px;
     }
 
   /* Right panel */
