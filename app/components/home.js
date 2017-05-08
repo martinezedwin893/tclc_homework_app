@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Router, Route, Link, IndexLink, IndexRoute, hashHistory, browserHistory} from 'react-router';
 import Popup from 'react-popup';
-import ReactDOM from 'react-dom'
 
 import Modal from 'boron/DropModal';
 
@@ -27,12 +26,6 @@ class Home extends Component {
         };
     }
 
-    showModal(){
-      this.refs.modal.show();
-    }
-    hideModal(){
-        this.refs.modal.hide();
-    }
 
     componentWillMount() {
         let Rebase = require('re-base');
@@ -132,7 +125,10 @@ class Home extends Component {
             }
             else {
               currentUsers[index].points[yearMonth][date[2]]["V"] += value;
+              currentUsers[index].completedVolunteering += value;
             }
+
+            //currentUsers[index].completedVolunteering += value;
 
             currentUsers[index].points[yearMonth].totalPoints += value;
             currentUsers[index].totalPoints += value;
@@ -255,13 +251,9 @@ class Home extends Component {
                           <input type="radio" name="gender" value="female" onClick={()=>{isHomework = false;}} />  Volunteering
                         </form>
                         <button type="button" onClick={this.addValue.bind(this,isHomework)} className="add-button">Add</button>
-                        <Modal ref="modal">
-                          <center><h2> points successfully added!</h2></center>
-                        </Modal>
-                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework), this.showModal.bind(this)}>Reset Points</button></center>
-                        <Modal ref="modal">
-                          <center><h2>Points successfully reset!</h2></center>
-                        </Modal>
+
+                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)}>Reset Points</button></center>
+
                     </div>
                 </div>
             </div>
