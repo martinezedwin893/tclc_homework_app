@@ -4,13 +4,16 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 a, a:hover, a:visited, a:link, a:active {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 ::-webkit-scrollbar {
-  display: none; }
+  display: none;
+}
 
 .home {
   width: 100vw;
@@ -315,10 +318,14 @@ a, a:hover, a:visited, a:link, a:active {
       margin-left: 38px;
     }
 
-    .classroom .left-panel .x-axis .month {
+    .classroom .left-panel .month {
       text-align: center;
       width: 125px;
       float: left;
+    }
+
+    .classroom .left-panel .month h4 {
+      font-size: 15px; 
     }
 
   /* Right panel */
