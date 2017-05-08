@@ -220,7 +220,7 @@ a, a:hover, a:visited, a:link, a:active {
   text-align: center;
   left: 50%;
   bottom: 100px;
-  margin: auto;
+  margin-top: -30px;
   transform: translateX(-50%); }
 
 .leaderboard .chart {
