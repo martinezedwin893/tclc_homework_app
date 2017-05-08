@@ -219,6 +219,7 @@ a, a:hover, a:visited, a:link, a:active {
   position: fixed;
   text-align: center;
   left: 50%;
+  bottom: 100px;
   margin: auto;
   transform: translateX(-50%); }
 
@@ -229,7 +230,8 @@ a, a:hover, a:visited, a:link, a:active {
   top: 50px;
   overflow-y: scroll;
   left: 50%;
-  transform: translateX(-50%); }
+  transform: translateX(-50%);
+  }
 
 .leaderboard .chart-table {
   margin: 20px; }
@@ -254,7 +256,7 @@ a, a:hover, a:visited, a:link, a:active {
   background: #F2F2F2; }
 
 .leaderboard .chart-table .topFive {
-  border: 3px solid #4EABDE; }
+  border: 4px solid #4EABDE; }
 
 
 /*
