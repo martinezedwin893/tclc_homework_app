@@ -189,7 +189,8 @@ a, a:hover, a:visited, a:link, a:active {
 .leaderboard {
   width: 100vw;
   top: 60px;
-  margin: auto; }
+  margin: auto;
+  overflow-y: scroll; }
 
 .leaderboard .chart-table-row-rank {
   width: 200px;}
@@ -217,8 +218,8 @@ a, a:hover, a:visited, a:link, a:active {
   top: 60px;
   position: fixed;
   text-align: center;
-  z-index: 100;
   left: 50%;
+  margin: auto;
   transform: translateX(-50%); }
 
 .leaderboard .chart {
