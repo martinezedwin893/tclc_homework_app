@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {Router, Route, Link, IndexLink, IndexRoute, hashHistory, browserHistory} from 'react-router';
-import Popup from 'react-popup';
 
-import Modal from 'boron/DropModal';
-
+import swal from 'sweetalert2'
 import {getDate} from './firebase.js';
 
 
@@ -23,6 +21,7 @@ class Home extends Component {
             index: 0,
             test: 0,
             reset: 0,
+            show: false,
         };
     }
 
@@ -42,6 +41,7 @@ class Home extends Component {
             state: 'user'
         });
     }
+
 
     componentDidMount(){
 
@@ -119,6 +119,7 @@ class Home extends Component {
 
         if (value > 0) {
 
+
             if(isHomework){
               currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
               currentUsers[index].points[yearMonth].completedHomework += value;
@@ -128,16 +129,26 @@ class Home extends Component {
               currentUsers[index].completedVolunteering += value;
             }
 
-            //currentUsers[index].completedVolunteering += value;
 
             currentUsers[index].points[yearMonth].totalPoints += value;
             currentUsers[index].totalPoints += value;
             currentUsers[index].jumps += value;
+
+            swal(
+              'Successfully Added!',
+              value + ' points added to '+ currentUsers[index].first+'!',
+              'success'
+            )
         }
 
         // reset points for student
         else if (this.state.reset == 1) {
 
+          swal(
+            'Successfully Reset!',
+            'Points reset for ' + currentUsers[index].first+'!',
+            'success'
+          )
           this.state.reset = 0;
           currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
           currentUsers[index].points[yearMonth].completedHomework =0;
@@ -153,6 +164,12 @@ class Home extends Component {
         this.setState({
             user: currentUsers
         });
+
+
+        //set box value back to 0
+        document.getElementById("input-add").value = 0;
+
+
     }
 
     decrement() {
@@ -225,7 +242,10 @@ class Home extends Component {
         let isHomework = true;
 
         return (
+
+
             <div className="home">
+
                 <div className="left-panel">
                     <div className="date">{weekday}, {month} {day}, {year}</div>
                     <div className="chart">
@@ -251,8 +271,8 @@ class Home extends Component {
                           <input type="radio" name="gender" value="female" onClick={()=>{isHomework = false;}} />  Volunteering
                         </form>
                         <button type="button" onClick={this.addValue.bind(this,isHomework)} className="add-button">Add</button>
-
                         <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)}>Reset Points</button></center>
+
 
                     </div>
                 </div>

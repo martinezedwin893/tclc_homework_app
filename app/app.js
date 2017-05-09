@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Router, Route, Link, IndexRoute, hashHistory, browserHistory, IndexLink } from 'react-router'
 require('./css/globals.css')
+require('../node_modules/sweetalert2/dist/sweetalert2.css')
+require('../node_modules/sweetalert2/dist/sweetalert2.min.css')
 
 import Nav from './components/nav.js'
 import Home from './components/home.js'
