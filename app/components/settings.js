@@ -183,7 +183,32 @@ class Settings extends Component {
    * render the Classroom page
    */
   render() {
-    
+    let barHeightHomework = 0;
+    let barHeightVolunteer = 0;
+    let increment = 0;
+
+    if(this.getAllPoints()){
+      increment = 400/(this.getAllPoints()*3);
+      barHeightHomework = increment * this.getAllPoints();
+    }
+
+    let selected = this.state.activeUser;
+    let top = "";
+    let bottom = "";
+    let numPoints = 0;
+
+    if(selected.first == "Welcome"){
+      top = "Average # of Points Earned"
+      bottom = ""
+      numPoints = this.getAllPoints();
+
+    } else{
+      top = selected.first;
+      bottom = selected.last;
+      numPoints = this.getPoints();
+      increment = 400/(this.getPoints()*7);
+      barHeightHomework = increment * this.getPoints();
+      console.log(barHeightHomework);
     }
 
     return (
@@ -192,8 +217,7 @@ class Settings extends Component {
 
           <h3>Account Details</h3>
           <h3>Students</h3>
-
-
+          
 
         </div>
 
