@@ -309,9 +309,9 @@ a, a:hover, a:visited, a:link, a:active {
     }
 
     .classroom .left-panel .graph-bar h4 {
-      position: absolute;
+      position: relative;
       top: -30px;
-      color: #D8D8D8;
+      color: #000000;
     }
 
     .classroom .left-panel .x-axis {
