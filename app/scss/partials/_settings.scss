@@ -1,15 +1,29 @@
-.settings {
- width: 100vw;
+.settings{
+
+  width: 100vw;
   position: relative;
   top: 60px;
   vertical-align: top;
   display: flex;
-}
+  overflow: hidden;
 
+  .leftpanel {
+    overflow-y: scroll;
+    width: 30vw;
+    height: 90vh;
+    position: relative;
+    top: 30px;
+    padding: 0 3vw;
 
-h1{
-  text-align: center;
-  color: $gray;
-  padding: 10px 0;
-   }
-      
+  	}
+
+.right-panel {
+    width: 30vw;
+    height: 90vh;
+    position: relative;
+    top: 30px;
+    padding: 0 3vw;
+
+    }
+
+  }

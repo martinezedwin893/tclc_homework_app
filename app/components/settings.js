@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
-import { 
-	Router, 
-	Route, 
-	Link, 
-	IndexLink, 
-	IndexRoute, 
-	hashHistory, 
-	browserHistory 
+import {
+  Router,
+  Route,
+  Link,
+  IndexLink,
+  IndexRoute,
+  hashHistory,
+  browserHistory
 } from 'react-router';
-
+import {
+  getDate,
+  getYear,
+  getMonth,
+  getMonthName,
+  getCurrentMonthName,
+  getAllStudentsLeaderboard
+} from './firebase.js';
 
 
 class Settings extends Component {
-	//added new 
-	constructor(props, context) {
-		super(props);
-		this.context = context;
 
-		//code from classroom
-		this.state = {
+  /*
+   * set up classroom
+   */
+  constructor(props, context) {
+      super(props);
+      this.context = context;
+
+      this.state = {
           user: {},
           activeUser: {
             "first": "Welcome",
@@ -27,30 +36,14 @@ class Settings extends Component {
           index: 0,
           test: 0
       };
-
-      //code for add student
-
-		 this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-	 
-
-	//Set up the Firebase to add student
-	componentWillMount() {
+  /*
+   * set up Firebase
+   */
+  componentWillMount() {
       let Rebase = require('re-base');
-      let base = Rebase.createClass(
-      {
+      let base = Rebase.createClass({
           apiKey: "AIzaSyD_l86M8ZSZilyYVx2nzIsK4s-UT8Hw66s",
           authDomain: "homework-app-81383.firebaseapp.com",
           databaseURL: "https://homework-app-81383.firebaseio.com",
@@ -60,7 +53,7 @@ class Settings extends Component {
 
       base.syncState('users', {
           context: this,
-          state: 'user' //or 'students'
+          state: 'user'
       });
   }
 
@@ -80,6 +73,34 @@ class Settings extends Component {
       });
 
       console.log(activeUser);
+  }
+
+  /*
+   * Renders x-axis
+   */
+  renderXAxis() {
+    let totalMonths = 6;
+    let monthsArray = [];
+
+    // mod = ((n % m) + m) % m
+    let currentMonth = (((getMonth() - totalMonths) % 12) + 12) % 12;
+
+    // print the current and previous 5 months
+    for (var index = 0; index < totalMonths; index++) {
+      monthsArray.push(
+        <div className = "month">
+          <h4>{getMonthName(currentMonth)}</h4>
+        </div>
+      );
+
+      currentMonth = (currentMonth + 1) % 12;
+    }
+
+    return(
+      <div className = "x-axis">
+        {monthsArray}
+      </div>
+    );
   }
 
   /*
@@ -132,26 +153,64 @@ class Settings extends Component {
       );
   }
 
+  /*
+   * gets total points of all students
+   */
+  getAllPoints(){
+    let pArray = getAllStudentsLeaderboard(this.state.user);
+    let points = 0;
 
-  //just to see that the changes are showing
- 
+    for (var key in pArray) {
+      points += pArray[key].totalPoints;
+    }
 
-  //old code
-    render() {
+    return points;
+  }
+
+  /*
+   * gets points of an individual student
+   */
+  getPoints(){
+    let currentUsers = this.state.user;
+    let activeUser = this.state.activeUser;
+    let index = this.state.index;
+    let date = getYear() + "-" + getMonth();
+    console.log(currentUsers[index].points[date].totalPoints);
+    return currentUsers[index].points[date].totalPoints;
+  }
+
+  /*
+   * render the Classroom page
+   */
+  render() {
+    
+    }
+
     return (
-    	<div>Settings
-    	<center><h1>Add Students</h1></center>
-    	<center> <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form></center>
-    	</div>
-        );
+      <div className = "classroom">
+        <div className = "left-panel">
 
-  } 
+          <h3>Account Details</h3>
+          <h3>Students</h3>
+
+
+
+        </div>
+
+        <div className = "right-panel">
+          <div className = "chart-header-names">Name</div>
+          {this.renderTable()}
+          <form>
+  <label>
+    Name:
+    <input type="text" name="name" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default Settings
