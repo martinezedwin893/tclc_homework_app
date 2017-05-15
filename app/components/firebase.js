@@ -223,6 +223,7 @@ export function getMonthName(monthIndex) {
 }
 
 
+
 // FirebasePostUtils
 /*
  post to /{username}/{points}/{YY-M}/{D}
