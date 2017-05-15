@@ -78,8 +78,8 @@ class Leaderboard extends Component {
         <div className="chart-table-row isGray" key={index} id={index}>
         <div className="chart-table-row-rank">{index + 1}</div>
         <div className="chart-table-row-name">{student.name}</div>
-        <div className="chart-table-row-hw">3</div>
-        <div className="chart-table-row-volunteering">2</div>
+        <div className="chart-table-row-hw">{student.homework}</div>
+        <div className="chart-table-row-volunteering">{student.volunteering}</div>
         <div className="chart-table-row-total">{student.totalPoints}</div>
         </div>
       );
@@ -90,8 +90,8 @@ class Leaderboard extends Component {
         <div className="chart-table-row" key={index} id={index}>
         <div className="chart-table-row-rank">{index + 1}</div>
         <div className="chart-table-row-name">{student.name}</div>
-        <div className="chart-table-row-hw">1</div>
-        <div className="chart-table-row-volunteering">2</div>
+        <div className="chart-table-row-hw">{student.homework}</div>
+        <div className="chart-table-row-volunteering">{student.volunteering}</div>
         <div className="chart-table-row-total">{student.totalPoints}</div>
         </div>
       );
