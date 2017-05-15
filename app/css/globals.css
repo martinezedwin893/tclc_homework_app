@@ -215,7 +215,7 @@ a, a:hover, a:visited, a:link, a:active {
 
 .leaderboard .date {
   width: 100vw;
-  top: 60px;
+  top: 55px;
   position: fixed;
   text-align: center;
   left: 50%;
@@ -225,7 +225,7 @@ a, a:hover, a:visited, a:link, a:active {
 
 .leaderboard .chart {
   width: 100vw;
-  padding: 5%;
+  padding: 6%;
   position: relative;
   top: 50px;
   overflow-y: scroll;
