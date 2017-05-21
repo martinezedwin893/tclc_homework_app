@@ -149,14 +149,6 @@ class Home extends Component {
                 'success'
               )
             })
-
-/*
-            swal(
-              'Successfully Added!',
-              value + ' points added to '+ currentUsers[index].first+'!',
-              'success'
-            )
-            */
         }
 
         // reset points for student
