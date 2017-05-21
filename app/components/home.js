@@ -134,11 +134,30 @@ class Home extends Component {
             currentUsers[index].totalPoints += value;
             currentUsers[index].jumps += value;
 
+            swal({
+              title: 'Are you sure?',
+              text: 'Confirm addition of ' + value +
+              ' points to ' +currentUsers[index].first+'?',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, add points!'
+            }).then(function () {
+              swal(
+                'Successfully Added!',
+                value + ' points added to '+ currentUsers[index].first+'!',
+                'success'
+              )
+            })
+
+/*
             swal(
               'Successfully Added!',
               value + ' points added to '+ currentUsers[index].first+'!',
               'success'
             )
+            */
         }
 
         // reset points for student
