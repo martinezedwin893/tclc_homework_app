@@ -119,19 +119,18 @@ class Home extends Component {
 
         if (value > 0) {
 
-
             if(isHomework){
               currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
               currentUsers[index].points[yearMonth].completedHomework += value;
+              currentUsers[index].completedHomework += value;
             }
             else {
               currentUsers[index].points[yearMonth][date[2]]["V"] += value;
-              currentUsers[index].completedVolunteering += value;
+              currentUsers[index].points[yearMonth].completedVolunteering += value;
             }
 
-
-            currentUsers[index].points[yearMonth].totalPoints += value;
             currentUsers[index].totalPoints += value;
+            currentUsers[index].points[yearMonth].totalPoints += value;
             currentUsers[index].jumps += value;
 
             swal(
