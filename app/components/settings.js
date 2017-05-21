@@ -180,7 +180,7 @@ class Settings extends Component {
   }
 
   /*
-   * render the Classroom page
+   * render the Settings page
    */
   render() {
     let barHeightHomework = 0;
