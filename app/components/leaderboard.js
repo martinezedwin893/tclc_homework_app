@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {getCurrentMonthName, getFourDigitYear, getAllStudentsLeaderboard} from './firebase.js';
+import {getAllStudentsLeaderboard} from './firebase.js';
 
 class Leaderboard extends Component {
   mixins: [ReactFireMixin];
@@ -78,8 +78,8 @@ class Leaderboard extends Component {
         <div className="chart-table-row isGray" key={index} id={index}>
         <div className="chart-table-row-rank">{index + 1}</div>
         <div className="chart-table-row-name">{student.name}</div>
-        <div className="chart-table-row-hw">3</div>
-        <div className="chart-table-row-volunteering">2</div>
+        <div className="chart-table-row-hw">{student.homework}</div>
+        <div className="chart-table-row-volunteering">{student.volunteering}</div>
         <div className="chart-table-row-total">{student.totalPoints}</div>
         </div>
       );
@@ -90,8 +90,8 @@ class Leaderboard extends Component {
         <div className="chart-table-row" key={index} id={index}>
         <div className="chart-table-row-rank">{index + 1}</div>
         <div className="chart-table-row-name">{student.name}</div>
-        <div className="chart-table-row-hw">1</div>
-        <div className="chart-table-row-volunteering">2</div>
+        <div className="chart-table-row-hw">{student.homework}</div>
+        <div className="chart-table-row-volunteering">{student.volunteering}</div>
         <div className="chart-table-row-total">{student.totalPoints}</div>
         </div>
       );
@@ -99,14 +99,11 @@ class Leaderboard extends Component {
   }
 
   render() {
-    let month = getCurrentMonthName();
-    let year = getFourDigitYear();
-
     // Header for the table
     return (
       <div className="leaderboard">
       <div className="chart">
-      <h2 className="date">{month} {year}</h2>
+      <h2 className="date">Leaderboard</h2>
 
       <div className="chart-header">
       <div className="chart-header-rank"><b>Rank</b></div>

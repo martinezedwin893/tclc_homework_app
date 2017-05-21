@@ -80,8 +80,9 @@ export function getStudentLeaderboardData(student) {
 
     return {
         name: student.first + " " + student.last,
-        level: student.level ? student.level : 0,
-        totalPoints: student.points[date].totalPoints ? student.points[date].totalPoints : 0
+        volunteering: student.completedVolunteering,
+        homework: student.points[date].completedHomework,
+        totalPoints: student.totalPoints
     };
 }
 
