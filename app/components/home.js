@@ -22,13 +22,18 @@ class Home extends Component {
             test: 0,
             reset: 0,
             show: false,
+            base: null,
+            newStudentName: ""
         };
+
+        this.updateNewStudentName = this.updateNewStudentName.bind(this);
+        this.addNewStudentName = this.addNewStudentName.bind(this);
     }
 
 
     componentWillMount() {
         let Rebase = require('re-base');
-        let base = Rebase.createClass({
+        this.state.base = Rebase.createClass({
             apiKey: "AIzaSyD_l86M8ZSZilyYVx2nzIsK4s-UT8Hw66s",
             authDomain: "homework-app-81383.firebaseapp.com",
             databaseURL: "https://homework-app-81383.firebaseio.com",
@@ -36,7 +41,7 @@ class Home extends Component {
             messagingSenderId: "79481264901"
         }, 'base');
 
-        base.syncState('users', {
+        this.state.base.syncState('users', {
             context: this,
             state: 'user'
         });
@@ -211,6 +216,25 @@ class Home extends Component {
         window.alert("SUCCESS");
     }
 
+    updateNewStudentName(event) {
+        this.setState ({newStudentName: event.target.value});
+    }
+
+    addNewStudentName() {
+        var firstName = this.state.newStudentName.split(" ")[0];
+        var lastName = this.state.newStudentName.split(" ")[1];
+
+        //alert ("First Name = " + firstName + ", Last Name = " + lastName);
+        if(this.state.newStudentName.split(" ").length != 2){
+            alert("PLease enter in the full student's name, separated by a space.");
+        }else{
+            this.state.base.push('users', {
+                data: {first: firstName, last: lastName}
+            }).catch(error => {
+                alert("Oh no!\n\n" + error);
+            });
+        }
+    }
 
     /*Renders table with names*/
     renderTable() {
@@ -280,6 +304,14 @@ class Home extends Component {
                             <div className="chart-header-completed"> Homework Completed</div>
                         </div>
                         {this.renderTable()}
+                        <form>
+                        <label>
+                        Name:
+                         <input type="text" onChange={this.updateNewStudentName} name="name" />
+                        </label>
+                         <input type="submit" onClick={this.addNewStudentName} value="Submit" />
+                        </form>
+
                     </div>
                 </div>
                 <div className="right-panel">

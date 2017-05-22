@@ -212,7 +212,7 @@ class Settings extends Component {
     }
 
     return (
-      <div className = "classroom">
+      <div className = "settings">
         <div className = "left-panel">
 
           <h3>Account Details</h3>
