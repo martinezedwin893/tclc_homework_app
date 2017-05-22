@@ -153,12 +153,28 @@ class Home extends Component {
 
         // reset points for student
         else if (this.state.reset == 1) {
+          swal({
+            title: 'Are you sure?',
+            text: 'Confirm point reset for ' + currentUsers[index].first+'?',
+            type: 'warning',
+            showCancelButton:true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, reset points!'
+          }).then(function () {
+            swal(
+              'Successfully Reset!',
+              'Points reset for '+ currentUsers[index].first+'!',
+              'success'
+            )
+          })
 
-          swal(
+        /*  swal(
             'Successfully Reset!',
             'Points reset for ' + currentUsers[index].first+'!',
             'success'
           )
+          */
           this.state.reset = 0;
           currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
           currentUsers[index].points[yearMonth].completedHomework =0;
