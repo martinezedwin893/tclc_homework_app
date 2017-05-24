@@ -62,8 +62,9 @@
 
     .classroom .left-panel .x-axis .month {
       text-align: center;
-      width: 125px;
+      width: 8vw;
       float: left;
+      height: 10vh;
     }
 
     .classroom .left-panel .month h4 {
