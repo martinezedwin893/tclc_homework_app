@@ -3,10 +3,10 @@
  */
 export function getAllStudentsCompletedHomework(students) {
     let soln = [];
-    let temp = objectToArray(students);
-    for (let i = 0; i < temp.length; i++) {
-        let student = temp[i].value;
-        soln.push(getStudentsCompletedHomework(student));
+    let studentList = objectToArray(students);
+    for (let i = 0; i < studentList.length; i++) {
+        let student = studentList[i].value;
+        soln.push( getStudentsCompletedHomework(student) );
     }
 
     return soln;
@@ -53,15 +53,15 @@ export function getStudentsCompletedHomework(student) {
 }
 
 /*
- * Returns array of all students' total points for the passed in month/ year;
+ * Returns array of all students' total points for the passed in month / year
  * Sorted by descending totalPoints
  */
 export function getAllStudentsLeaderboard(students) {
     let soln = [];
-    let temp = objectToArray(students);
-    for (let i = 0; i < temp.length; i++) {
-        let student = temp[i].value;
-        soln.push(getStudentLeaderboardData(student));
+    let studentList = objectToArray(students);
+    for (let i = 0; i < studentList.length; i++) {
+        let student = studentList[i].value;
+        soln.push( getStudentLeaderboardData(student) );
     }
 
     soln.sort(function (a, b) {
@@ -80,7 +80,7 @@ export function getStudentLeaderboardData(student) {
 
     return {
         name: student.first + " " + student.last,
-        volunteering: student.completedVolunteering,
+        volunteering: student.totalVolunteering,
         homework: student.points[date].completedHomework,
         totalPoints: student.points[date].totalPoints
     };
