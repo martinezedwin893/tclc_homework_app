@@ -113,6 +113,7 @@ class ClassRoom extends Component {
       let usersArray = [];
       let count = Object.keys(currentUsers).length;
 
+      // iterate through list of students
       for (let index in currentUsers) {
 
           let currentUser = currentUsers[index];
@@ -153,10 +154,28 @@ class ClassRoom extends Component {
       );
   }
 
+  renderBars() {
+    return (
+    <div
+        className = "graph-bar"
+        style = {{
+          height: numPoints
+        }}>
+        <h4>{numPoints}</h4>
+      </div>
+    );
+  }
+
+
+
+
+
+
+
   /*
    * gets total points of all students
    */
-  getAllPoints(){
+  getAllPoints() {
     let pArray = getAllStudentsLeaderboard(this.state.user);
     let points = 0;
 
@@ -228,13 +247,7 @@ class ClassRoom extends Component {
               <div className = "graph-num">
               </div>
 
-              <div
-                className = "graph-bar"
-                style = {{
-                  height: numPoints
-                }}>
-                <h4>{numPoints}</h4>
-              </div>
+              {this.renderBars()}
 
             </div>
           </div>

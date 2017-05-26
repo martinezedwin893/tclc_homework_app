@@ -1,29 +1,30 @@
 /*
- * Returns array of all students with array of homework done for each month
+ * Returns array of all students with array of homework done over all months
  */
 export function getAllStudentsCompletedHomework(students) {
     let soln = [];
     let studentList = objectToArray(students);
     for (let i = 0; i < studentList.length; i++) {
         let student = studentList[i].value;
-        soln.push( getStudentsCompletedHomework(student) );
+        soln.push( getIndivStudentCompletedHomework(student) );
     }
 
     return soln;
 }
 
+
 /*
- * Returns student object with array of days that indicate (true/ false)
+ * Returns student object with array of days that indicate (true / false)
  * if a student has done the work for each day of the month
  */
-export function getStudentsCompletedHomework(student) {
+export function getIndivStudentCompletedHomework(student) {
     let soln = [];
-    let month = getMonth();
     let date = getYear() + "-" + getMonth();
     let pointsArr = objectToArray(student.points[date]);
     let keys = Object.keys(student.points[date]);
     let max = 31;
 
+    // set max day
     if (month == "2") {
         max = 28;
     } else if (month == "4" || month == "6" || month == "9" || month == "11") {
@@ -52,58 +53,26 @@ export function getStudentsCompletedHomework(student) {
     };
 }
 
+
 /*
- * Returns array of all students' total points for the passed in month / year
- * Sorted by descending totalPoints
+ * Returns array of all students with completed homework for each month
  */
-export function getAllStudentsLeaderboard(students) {
+export function getAllStudentsHomeworkPerMonth( students ) {
     let soln = [];
     let studentList = objectToArray(students);
     for (let i = 0; i < studentList.length; i++) {
         let student = studentList[i].value;
-        soln.push( getStudentLeaderboardData(student) );
-    }
-
-    soln.sort(function (a, b) {
-        return b.totalPoints - a.totalPoints;
-    });
-
-    return soln;
-}
-
-/*
- * Returns student object with name, level, and totalPoints for the month/year
- */
-export function getStudentLeaderboardData(student) {
-    if (student == null) return;
-    let date = getYear() + "-" + getMonth();
-
-    return {
-        name: student.first + " " + student.last,
-        volunteering: student.totalVolunteering,
-        homework: student.points[date].completedHomework,
-        totalPoints: student.points[date].totalPoints
-    };
-}
-
-/*
- * Returns array of all students with completed homework each month
- */
-export function getAllStudentsHomeworkPerMonth(students) {
-    let soln = [];
-    let temp = objectToArray(students);
-    for (let i = 0; i < temp.length; i++) {
-        let student = temp[i].value;
-        soln.push(getStudentHomeworkPerMonth(student));
+        soln.push(getIndivStudentHomeworkPerMonth(student));
     }
 
     return soln;
 }
 
+
 /*
- * Return number of completed homework each month for a student
+ * Return number of points for completed homework each month for a student
  */
-export function getStudentHomeworkPerMonth(student) {
+export function getIndivStudentHomeworkPerMonth( student ) {
     if (student == null || student.points == null) return;
 
     let year = getFourDigitYear();
@@ -123,6 +92,50 @@ export function getStudentHomeworkPerMonth(student) {
 
     return soln;
 }
+
+
+
+
+
+
+
+
+
+
+/*
+ * Returns array of all students' total points for the passed in month / year
+ * Sorted by descending totalPoints
+ */
+export function getAllStudentsLeaderboard( students ) {
+    let soln = [];
+    let studentList = objectToArray(students);
+    for (let i = 0; i < studentList.length; i++) {
+        let student = studentList[i].value;
+        soln.push( getStudentLeaderboardData(student) );
+    }
+
+    soln.sort(function (a, b) {
+        return b.totalPoints - a.totalPoints;
+    });
+
+    return soln;
+}
+
+/*
+ * Returns student object with name, level, and totalPoints for the month/year
+ */
+export function getStudentLeaderboardData( student ) {
+    if (student == null) return;
+    let date = getYear() + "-" + getMonth();
+
+    return {
+        name: student.first + " " + student.last,
+        volunteering: student.points[date].completedVolunteering,
+        homework: student.points[date].completedHomework,
+        totalPoints: student.points[date].totalPoints
+    };
+}
+
 
 /*
  * Returns boolean if the username and password combination exists
