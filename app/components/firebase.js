@@ -1,9 +1,18 @@
 /*
+ * Returns array of all students
+ */
+export function getStudentList(students) {
+  let studentList = objectToArray(students);
+  return studentList;
+}
+
+
+/*
  * Returns array of all students with array of homework done over all months
  */
 export function getAllStudentsCompletedHomework(students) {
     let soln = [];
-    let studentList = objectToArray(students);
+    let studentList = getStudentList(students);
     for (let i = 0; i < studentList.length; i++) {
         let student = studentList[i].value;
         soln.push( getIndivStudentCompletedHomework(student) );
@@ -12,14 +21,15 @@ export function getAllStudentsCompletedHomework(students) {
     return soln;
 }
 
-
 /*
  * Returns student object with array of days that indicate (true / false)
  * if a student has done the work for each day of the month
  */
 export function getIndivStudentCompletedHomework(student) {
     let soln = [];
+
     let date = getYear() + "-" + getMonth();
+
     let pointsArr = objectToArray(student.points[date]);
     let keys = Object.keys(student.points[date]);
     let max = 31;
@@ -55,17 +65,50 @@ export function getIndivStudentCompletedHomework(student) {
 
 
 /*
- * Returns array of all students with completed homework for each month
+ * Returns an array over the span of 6 months containing the total homework
+ * points of all students per month
  */
 export function getAllStudentsHomeworkPerMonth( students ) {
-    let soln = [];
-    let studentList = objectToArray(students);
-    for (let i = 0; i < studentList.length; i++) {
-        let student = studentList[i].value;
-        soln.push(getIndivStudentHomeworkPerMonth(student));
+    let totalHWPoints = [];
+    let studentList = getStudentList(students);
+    let totalMonths = 6;
+    let totalMonthPoints = 0;
+
+    // get month from 6 months back (0-indexed) and year
+    let month = (((getMonth() - totalMonths) % 12) + 12) % 12;
+    let year = getYear();
+
+    // iterate through previous 6 months
+    for (let currIndex = 0; currIndex < totalMonths; currIndex++) {
+      totalMonthPoints = 0;  // reset point count for month
+
+      // determine year
+      if ( ((month + 1) >= 12) && (getMonth() - totalMonths < 0) ) {
+        year = getYear() - 1;
+      } else {
+        year = getYear();
+      }
+
+      // get date as string
+      let date = year + "-" + (month + 1);
+
+      // iterate through list of students
+      for (let i = 0; i < studentList.length; i++) {
+        let student = studentList[i].value;  // grab student from list
+
+        // check if student has point values for that month or not
+        if ( student.points[date] != null ) {
+          totalMonthPoints += student.points[date].completedHomework;
+        }
+      }
+
+      totalHWPoints.push(totalMonthPoints);
+
+      // determine next month
+      month = (month + 1) % 12;
     }
 
-    return soln;
+    return totalHWPoints;
 }
 
 
@@ -168,6 +211,9 @@ export function getDate() {
     return [year, month, date];
 }
 
+/*
+ * Returns an array of Firebase objects
+ */
 function objectToArray(object) {
     if (object == null) return;
 
@@ -184,7 +230,7 @@ function objectToArray(object) {
 }
 
 /*
- * Returns the year as last two (e.g. 17)
+ * Returns the year as last two digits (e.g. 17)
  */
 export function getYear() {
     return getDate()[0];
@@ -199,6 +245,7 @@ export function getFourDigitYear() {
 
 /*
  * Returns the month number (e.g. March = 3)
+ * Returned value will be based on a 1-12 index
  */
 export function getMonth() {
     return getDate()[1];
@@ -223,14 +270,15 @@ let monthNames = [
 ];
 
 /*
- * Returns the month name (e.g. March)
+ * Returns the current month name (e.g. March)
  */
 export function getCurrentMonthName() {
     return monthNames[getMonth() - 1];
 }
 
 /*
- * Returns the month name based on index
+ * Returns the month name based on index (indexed from 1-12)
+ * The function will subtract by 1 to get the correct offset
  */
 export function getMonthName(monthIndex) {
   return monthNames[monthIndex];

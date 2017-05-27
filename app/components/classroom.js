@@ -14,7 +14,8 @@ import {
   getMonth,
   getMonthName,
   getCurrentMonthName,
-  getAllStudentsLeaderboard
+  getAllStudentsLeaderboard,
+  getAllStudentsHomeworkPerMonth
 } from './firebase.js';
 
 
@@ -104,6 +105,45 @@ class ClassRoom extends Component {
   }
 
   /*
+   * Renders the bars for the graph
+   */
+  renderBars(pointsArray) {
+    let totalMonths = 6;
+    let barsArray = [];
+
+    let increment = 50;
+
+    // create bar of points for each month
+    for (var index = 0; index < totalMonths; index++) {
+      // get height of the bar based on points for the month
+      let barHeightHomework = 100;
+
+      barsArray.push(
+        <div
+          className = "graph-bar"
+          style = {{
+            height: barHeightHomework
+          }}>
+          <h4>{barHeightHomework}</h4>
+        </div>
+      );
+    }
+
+    return (
+      <div className = "graph-data">
+
+        <div className = "graph-num">
+        </div>
+
+        {barsArray}
+        <h4>WHAT THE FUCK</h4>
+        <h3>tilted as fuck</h3>
+
+      </div>
+    );
+  }
+
+  /*
    * Renders table with names
    */
   renderTable() {
@@ -154,37 +194,13 @@ class ClassRoom extends Component {
       );
   }
 
-  renderBars() {
-    return (
-    <div
-        className = "graph-bar"
-        style = {{
-          height: numPoints
-        }}>
-        <h4>{numPoints}</h4>
-      </div>
-    );
-  }
-
-
-
-
-
-
-
   /*
-   * gets total points of all students
+   * gets array of total points of all students per month
    */
-  getAllPoints() {
-    let pArray = getAllStudentsLeaderboard(this.state.user);
-    let points = 0;
-
-    for (var key in pArray) {
-      points += pArray[key].totalPoints;
-    }
-
-    return points;
+  getTotalPoints() {
+    return getAllStudentsHomeworkPerMonth(this.state.user);
   }
+
 
   /*
    * gets points of an individual student
@@ -198,6 +214,8 @@ class ClassRoom extends Component {
     return currentUsers[index].points[date].totalPoints;
   }
 
+
+
   /*
    * render the Classroom page
    */
@@ -206,22 +224,24 @@ class ClassRoom extends Component {
     let barHeightVolunteer = 0;
     let increment = 0;
 
-    if(this.getAllPoints()){
-      increment = 400/(this.getAllPoints()*3);
-      barHeightHomework = increment * this.getAllPoints();
+/*
+    if(this.getTotalPoints()){
+      increment = 400/(this.getTotalPoints()*3);
+      barHeightHomework = increment * this.getTotalPoints();
     }
+*/
 
     let selected = this.state.activeUser;
     let top = "";
     let bottom = "";
-    let numPoints = 0;
+    let pointsArray = [];
 
-    if(selected.first == "Welcome"){
-      top = "Average # of Points Earned"
+    if (selected.first == "Welcome"){
+      top = "Total # of Points Earned per Month"
       bottom = ""
-      numPoints = this.getAllPoints();
+      pointsArray = this.getTotalPoints();
 
-    } else{
+    } else {
       top = selected.first;
       bottom = selected.last;
       numPoints = this.getPoints();
@@ -242,14 +262,7 @@ class ClassRoom extends Component {
           </div>
 
           <div className = "graph">
-            <div className = "graph-data">
-
-              <div className = "graph-num">
-              </div>
-
-              {this.renderBars()}
-
-            </div>
+              {this.renderBars(pointsArray)}
           </div>
 
           {this.renderXAxis()}

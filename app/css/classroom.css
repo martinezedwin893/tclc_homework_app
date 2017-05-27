@@ -36,6 +36,8 @@
       border-left: 2px solid #D8D8D8;
       border-bottom: 2px solid #D8D8D8;
       display: inline-block;
+
+      /*background: blue;*/
     }
 
     .classroom .left-panel .graph-bar {
@@ -45,12 +47,22 @@
       vertical-align: bottom;
       text-align: center;
       width: 100px;
+      display: inline-block;
     }
 
     .classroom .left-panel .graph-bar h4 {
       position: relative;
       top: -30px;
       color: #000000;
+    }
+
+    .classroom .left-panel .graph-data {
+      background: gray;
+      height: 300px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      align-content: space-between;
     }
 
     .classroom .left-panel .x-axis {
