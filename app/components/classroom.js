@@ -116,15 +116,19 @@ class ClassRoom extends Component {
     // create bar of points for each month
     for (var index = 0; index < totalMonths; index++) {
       // get height of the bar based on points for the month
-      let barHeightHomework = 100;
+      let barHeightHomework = pointsArray[index];
 
       barsArray.push(
-        <div
-          className = "graph-bar"
-          style = {{
-            height: barHeightHomework
-          }}>
-          <h4>{barHeightHomework}</h4>
+        <div className = "bar-container">
+
+          <div
+            className = "graph-bar"
+            style = {{
+              height: barHeightHomework
+            }}>
+            <h4>{barHeightHomework}</h4>
+          </div>
+
         </div>
       );
     }
@@ -134,11 +138,7 @@ class ClassRoom extends Component {
 
         <div className = "graph-num">
         </div>
-
-        {barsArray}
-        <h4>WHAT THE FUCK</h4>
-        <h3>tilted as fuck</h3>
-
+          {barsArray}
       </div>
     );
   }
@@ -201,7 +201,6 @@ class ClassRoom extends Component {
     return getAllStudentsHomeworkPerMonth(this.state.user);
   }
 
-
   /*
    * gets points of an individual student
    */
@@ -213,7 +212,6 @@ class ClassRoom extends Component {
     console.log(currentUsers[index].points[date].totalPoints);
     return currentUsers[index].points[date].totalPoints;
   }
-
 
 
   /*

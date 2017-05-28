@@ -36,19 +36,29 @@
       border-left: 2px solid #D8D8D8;
       border-bottom: 2px solid #D8D8D8;
       display: inline-block;
-
-      /*background: blue;*/
     }
 
     .classroom .left-panel .graph-bar {
       position: absolute;
       bottom: 0;
-      background: #61BBE3;
-      vertical-align: bottom;
       text-align: center;
-      width: 100px;
       display: inline-block;
+      margin-bottom: 0px;
+
+      width: 100px;
+      max-height: 390px;
+      background: #61BBE3;
     }
+
+    .classroom .left-panel .bar-container {
+      float: left;
+      height: 100%;
+      margin-right: 15px;
+      position: relative;
+      width: 100px;
+
+      /*background: red;*/
+  }
 
     .classroom .left-panel .graph-bar h4 {
       position: relative;
@@ -57,12 +67,12 @@
     }
 
     .classroom .left-panel .graph-data {
-      background: gray;
-      height: 300px;
+      height: 400px;
       width: 100%;
-      overflow: hidden;
       position: relative;
-      align-content: space-between;
+      display: inline-block;
+
+      /*background: gray;*/
     }
 
     .classroom .left-panel .x-axis {

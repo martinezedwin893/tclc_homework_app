@@ -63,6 +63,13 @@ export function getIndivStudentCompletedHomework(student) {
     };
 }
 
+/*
+ * Returns the index of the month from previous number of months back
+ * Calculates it by using the mod formula
+ */
+export function getPrevMonthIndex( previous ) {
+  return (((getMonth() - previous) % 12) + 12) % 12;
+}
 
 /*
  * Returns an array over the span of 6 months containing the total homework
@@ -75,7 +82,7 @@ export function getAllStudentsHomeworkPerMonth( students ) {
     let totalMonthPoints = 0;
 
     // get month from 6 months back (0-indexed) and year
-    let month = (((getMonth() - totalMonths) % 12) + 12) % 12;
+    let month = getPrevMonthIndex(totalMonths);
     let year = getYear();
 
     // iterate through previous 6 months
