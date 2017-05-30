@@ -11,6 +11,7 @@
   }
 
   .home .left-panel {
+    overflow-y: scroll;
     width: 70vw;
     height: 95vh;
     border-right: 1px solid #D8D8D8;
@@ -46,6 +47,7 @@
 
       .home .left-panel .chart-table {
         margin-top: 10px;
+        margin-bottom: 20px;
       }
 
         .home .left-panel .chart-table-row {

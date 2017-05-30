@@ -94,10 +94,12 @@
 
     .settings .right-panel .chart-header-names {
       padding-left: 3%;
+      font-weight: bold;
     }
 
     .settings .right-panel .chart-table {
       margin-top: 10px;
+      margin-bottom: 20px;
     }
 
     .settings .right-panel .chart-table-row {
