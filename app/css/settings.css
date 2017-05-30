@@ -84,7 +84,6 @@
       padding: 5%;
       position: relative;
       top: 30px;
-      overflow-y: scroll;
     }
 
     .settings.right-panel .chart-header {
@@ -134,4 +133,10 @@
 
     .settings .right-panel .chart-table .isGray {
       background: #F2F2F2;
+    }
+
+    .settings input[type=text] {
+      margin-bottom: 20px;
+      margin-left: 5px;
+      margin-right: 5px;
     }
