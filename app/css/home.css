@@ -42,7 +42,7 @@
       }
 
         .home .left-panel .chart-header-completed {
-          margin-right: 10px;
+
         }
 
       .home .left-panel .chart-table {
@@ -70,7 +70,7 @@
           }
 
           .home .left-panel .chart-table-row-completed, .home .left-panel .chart-table-row-notcompleted {
-            margin-right: 65px;
+            margin-right: 55px;
             border: 2px solid;
             border-radius: 10px;
             padding: 2px 5px;
