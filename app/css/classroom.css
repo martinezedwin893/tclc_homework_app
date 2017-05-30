@@ -101,13 +101,13 @@
     position: relative;
     top: 30px;
     padding: 0 3vw;
+    overflow-y: scroll;
   }
 
     .classroom .right-panel .chart {
       padding: 5%;
       position: relative;
       top: 30px;
-      overflow-y: scroll;
     }
 
     .classroom .right-panel .chart-header {
