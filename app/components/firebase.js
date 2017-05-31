@@ -8,6 +8,15 @@ export function getStudentList(students) {
 
 
 /*
+ * Returns the index of the month from a previous number of months back
+ * Calculates it by using the mod formula -- mod = ((n % m) + m) % m
+ */
+export function getPrevMonthIndex( previous ) {
+  return (((getMonth() - previous) % 12) + 12) % 12;
+}
+
+
+/*
  * Returns array of all students with array of homework done over all months
  */
 export function getAllStudentsCompletedHomework(students) {
@@ -20,6 +29,7 @@ export function getAllStudentsCompletedHomework(students) {
 
     return soln;
 }
+
 
 /*
  * Returns student object with array of days that indicate (true / false)
@@ -63,20 +73,13 @@ export function getIndivStudentCompletedHomework(student) {
     };
 }
 
-/*
- * Returns the index of the month from previous number of months back
- * Calculates it by using the mod formula
- */
-export function getPrevMonthIndex( previous ) {
-  return (((getMonth() - previous) % 12) + 12) % 12;
-}
 
 /*
  * Returns an array over the span of 6 months containing the total homework
  * points of all students per month
  */
-export function getAllStudentsHomeworkPerMonth( students ) {
-    let totalHWPoints = [];
+export function getAllStudentsPointsPerMonth( students, category ) {
+    let totalCategoryPoints = [];
     let studentList = getStudentList(students);
     let totalMonths = 6;
     let totalMonthPoints = 0;
@@ -105,17 +108,25 @@ export function getAllStudentsHomeworkPerMonth( students ) {
 
         // check if student has point values for that month or not
         if ( student.points[date] != null ) {
-          totalMonthPoints += student.points[date].completedHomework;
+
+          // get homework points
+          if (category == "homework" && student.points[date].completedHomework != null) {
+            totalMonthPoints += student.points[date].completedHomework;
+
+          // get volunteering points
+          } else if (category == "volunteering" && student.points[date].completedVolunteering != null) {
+            totalMonthPoints += student.points[date].completedVolunteering;
+          }
         }
       }
 
-      totalHWPoints.push(totalMonthPoints);
+      totalCategoryPoints.push(totalMonthPoints);
 
       // determine next month
       month = (month + 1) % 12;
     }
 
-    return totalHWPoints;
+    return totalCategoryPoints;
 }
 
 
