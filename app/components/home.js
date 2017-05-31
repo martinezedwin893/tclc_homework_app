@@ -306,10 +306,10 @@ class Home extends Component {
                         {this.renderTable()}
                         <form>
                         <label>
-                        Name: 
+                        New Student Name:
                          <input type="text" onChange={this.updateNewStudentName} name="name" />
                         </label>
-                       <input type="submit" onClick={this.addNewStudentName} value="Submit" />
+                       <input type="submit" onClick={this.addNewStudentName} className="submit-button" value="Submit" />
                         </form>
 
                     </div>
@@ -329,7 +329,7 @@ class Home extends Component {
                           <input type="radio" name="gender" value="female" onClick={()=>{isHomework = false;}} />  Volunteering
                         </form>
                         <button type="button" onClick={this.addValue.bind(this,isHomework)} className="add-button">Add</button>
-                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)}>Reset Points</button></center>
+                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)} className="reset-button">Reset Points</button></center>
 
 
                     </div>
