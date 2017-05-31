@@ -275,7 +275,7 @@ class ClassRoom extends Component {
         </div>
 
         <div className = "right-panel">
-          <div className = "chart-header-names">Name</div>
+          <div className = "chart-header-names"><b>Name</b></div>
           {this.renderTable()}
         </div>
       </div>

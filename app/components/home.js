@@ -306,10 +306,10 @@ class Home extends Component {
                         {this.renderTable()}
                         <form>
                         <label>
-                        Name:
+                        Name: 
                          <input type="text" onChange={this.updateNewStudentName} name="name" />
                         </label>
-                         <input type="submit" onClick={this.addNewStudentName} value="Submit" />
+                       <input type="submit" onClick={this.addNewStudentName} value="Submit" />
                         </form>
 
                     </div>

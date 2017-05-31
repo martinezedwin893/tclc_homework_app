@@ -11,6 +11,7 @@
   }
 
   .home .left-panel {
+    overflow-y: scroll;
     width: 70vw;
     height: 95vh;
     border-right: 1px solid #D8D8D8;
@@ -41,11 +42,12 @@
       }
 
         .home .left-panel .chart-header-completed {
-          margin-right: 100px;
+
         }
 
       .home .left-panel .chart-table {
         margin-top: 10px;
+        margin-bottom: 20px;
       }
 
         .home .left-panel .chart-table-row {
@@ -68,7 +70,7 @@
           }
 
           .home .left-panel .chart-table-row-completed, .home .left-panel .chart-table-row-notcompleted {
-            margin-right: 100px;
+            margin-right: 55px;
             border: 2px solid;
             border-radius: 10px;
             padding: 2px 5px;
@@ -148,4 +150,10 @@
       background-color: #35677D;
       box-shadow: 0 2px #666;
       transform: translateY(1px);
+    }
+
+    .home input[type=text] {
+      margin-bottom: 20px;
+      margin-left: 5px;
+      margin-right: 5px;
     }

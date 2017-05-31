@@ -2,7 +2,6 @@
   width: 100vw;
   top: 60px;
   margin: auto;
-  overflow-y: scroll;
 }
 
 .leaderboard .chart-table-row-rank {
@@ -48,7 +47,7 @@
 .leaderboard .date {
   width: 100vw;
   top: 55px;
-  position: fixed;
+  position: absolute;
   text-align: center;
   left: 50%;
   bottom: 100px;
@@ -64,6 +63,7 @@
   overflow-y: scroll;
   left: 50%;
   transform: translateX(-50%);
+  height: 60vw;
 }
 
 .leaderboard .chart-table {
