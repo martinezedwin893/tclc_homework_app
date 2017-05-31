@@ -191,9 +191,9 @@ export function getStudentLeaderboardData( student ) {
 
     return {
         name: student.first + " " + student.last,
-        volunteering: student.points[date].completedVolunteering,
-        homework: student.points[date].completedHomework,
-        totalPoints: student.points[date].totalPoints
+        volunteering: student.totalVolunteering,
+        homework: student.totalHomework,
+        totalPoints: student.totalPoints
     };
 }
 
