@@ -14,8 +14,9 @@ import {
   getMonth,
   getMonthName,
   getCurrentMonthName,
-  getAllStudentsLeaderboard,
-  getAllStudentsHomeworkPerMonth
+  getPrevMonthIndex,
+
+  getAllStudentsPointsPerMonth
 } from './firebase.js';
 
 
@@ -83,8 +84,8 @@ class ClassRoom extends Component {
     let totalMonths = 6;
     let monthsArray = [];
 
-    // mod = ((n % m) + m) % m
-    let currentMonth = (((getMonth() - totalMonths) % 12) + 12) % 12;
+    // get index of month from totalMonths ago
+    let currentMonth = getPrevMonthIndex(totalMonths);
 
     // print the current and previous 5 months
     for (var index = 0; index < totalMonths; index++) {
@@ -138,7 +139,8 @@ class ClassRoom extends Component {
 
         <div className = "graph-num">
         </div>
-          {barsArray}
+
+        {barsArray}
       </div>
     );
   }
@@ -197,8 +199,8 @@ class ClassRoom extends Component {
   /*
    * gets array of total points of all students per month
    */
-  getTotalPoints() {
-    return getAllStudentsHomeworkPerMonth(this.state.user);
+  getTotalPoints(category) {
+    return getAllStudentsPointsPerMonth(this.state.user, category);
   }
 
   /*
@@ -209,8 +211,9 @@ class ClassRoom extends Component {
     let activeUser = this.state.activeUser;
     let index = this.state.index;
     let date = getYear() + "-" + getMonth();
+
     console.log(currentUsers[index].points[date].totalPoints);
-    return currentUsers[index].points[date].totalPoints;
+    return currentUsers[index].points[date].totalHomework;
   }
 
 
@@ -219,7 +222,6 @@ class ClassRoom extends Component {
    */
   render() {
     let barHeightHomework = 0;
-    let barHeightVolunteer = 0;
     let increment = 0;
 
 /*
@@ -232,12 +234,15 @@ class ClassRoom extends Component {
     let selected = this.state.activeUser;
     let top = "";
     let bottom = "";
-    let pointsArray = [];
+    let homeworkArray = [];
+    let volunteeringArray = [];
 
     if (selected.first == "Welcome"){
       top = "Total # of Points Earned per Month"
       bottom = ""
-      pointsArray = this.getTotalPoints();
+      homeworkArray = this.getTotalPoints("homework");
+      volunteeringArray = this.getTotalPoints("volunteering");
+
 
     } else {
       top = selected.first;
@@ -246,6 +251,8 @@ class ClassRoom extends Component {
       increment = 400/(this.getPoints()*7);
       barHeightHomework = increment * this.getPoints();
       console.log(barHeightHomework);
+      console.log(homeworkArray);
+      homeworkArray = [100, 200, 0, 0, 0, 300];
     }
 
     return (
@@ -260,7 +267,7 @@ class ClassRoom extends Component {
           </div>
 
           <div className = "graph">
-              {this.renderBars(pointsArray)}
+              {this.renderBars(homeworkArray)}
           </div>
 
           {this.renderXAxis()}
