@@ -65,7 +65,7 @@ class Home extends Component {
         if (!(yearMonth in currentUsers[index].points)) {
             currentUsers[index].points[yearMonth] = {
                 "completedHomework": 0,
-                "month": "April",
+                "month": "June",
                 "totalPoints": 0,
                 "year": 2017
             };
@@ -229,7 +229,7 @@ class Home extends Component {
             alert("PLease enter in the full student's name, separated by a space.");
         }else{
             this.state.base.push('users', {
-                data: {first: firstName, last: lastName}
+                data: {first: firstName, last: lastName, totalHomework: 0, totalVolunteering: 0, totalPoints: 0, points: 0}
             }).catch(error => {
                 alert("Oh no!\n\n" + error);
             });
