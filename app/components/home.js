@@ -114,15 +114,17 @@ class Home extends Component {
         }
 
 
-        if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
-            currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
-        }
+
 
         if (value < 0) {
           window.alert("Please enter a positive number.");
         }
 
         if (value > 0) {
+
+          if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
+              currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
+          }
 
             if(isHomework){
               currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
@@ -158,6 +160,10 @@ class Home extends Component {
 
         // reset points for student
         else if (this.state.reset == 1) {
+
+
+
+
           swal({
             title: 'Are you sure?',
             text: 'Confirm point reset for ' + currentUsers[index].first+'?',
@@ -186,7 +192,7 @@ class Home extends Component {
 
           currentUsers[index].points[yearMonth][date[2]]["V"] =0;
 
-
+          //currentUsers[index].points[yearMonth][date[2]] = undefined;
           currentUsers[index].points[yearMonth].totalPoints =0;
           currentUsers[index].totalPoints =0;
           currentUsers[index].jumps =0;
@@ -229,7 +235,7 @@ class Home extends Component {
             alert("PLease enter in the full student's name, separated by a space.");
         }else{
             this.state.base.push('users', {
-                data: {first: firstName, last: lastName, totalHomework: 0, totalVolunteering: 0, totalPoints: 0, points: 0}
+                data: {first: firstName, last: lastName, totalHomework: 0, totalVolunteering: 0, totalPoints: 0}
             }).catch(error => {
                 alert("Oh no!\n\n" + error);
             });
@@ -249,7 +255,7 @@ class Home extends Component {
             let currentUser = currentUsers[index];
 
             let homeworkCompleted;
-            if ("points" in currentUser && yearMonth in currentUser.points && date[2] in currentUser.points[yearMonth]) {
+            if ("points" in currentUser && yearMonth in currentUser.points && currentUser.points[yearMonth][date[2]] && (currentUser.points[yearMonth][date[2]]["HW"] != 0)) {
                 homeworkCompleted = <div className="chart-table-row-completed">Completed</div>;
             } else {
                 homeworkCompleted = <div className="chart-table-row-notcompleted">Not Completed</div>;
