@@ -238,8 +238,6 @@ class Home extends Component {
             this.state.base.push('users', {
                 data: {first: firstName, last: lastName, totalHomework: 0, totalVolunteering: 0, totalPoints: 0}
             }).catch(error => {
-                alert("Oh no!\n\n" + error);
-            });
         }
     }
 
