@@ -20,7 +20,7 @@
   }
     .classroom .left-panel .label {
       margin-top: 50px;
-      width: 45px;
+      width: 40px;
       height: 400px;
       float: left;
       display: inline-block;
@@ -45,7 +45,7 @@
       display: inline-block;
       margin-bottom: 0px;
 
-      width: 100px;
+      width: 6vw;
       max-height: 390px;
       background: #61BBE3;
     }
@@ -53,9 +53,9 @@
     .classroom .left-panel .bar-container {
       float: left;
       height: 100%;
-      margin-right: 15px;
+      margin-right: 2vw;
       position: relative;
-      width: 100px;
+      width: 6vw;
 
       /*background: red;*/
   }
@@ -79,14 +79,19 @@
       padding: 0 3%;
       overflow: hidden;
       position: relative;
-      margin-left: 38px;
+      margin-left: 2vw;
+      width: 100%;
+
+      /*background: red;*/
     }
 
     .classroom .left-panel .x-axis .month {
       text-align: center;
       width: 8vw;
       float: left;
-      height: 10vh;
+      height: 20vh;
+
+      /*background: blue;*/
     }
 
     .classroom .left-panel .month h4 {

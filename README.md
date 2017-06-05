@@ -22,3 +22,9 @@ sass --watch scss/globals.scss:css/globals.css
 ```
 
 If you keep this running, the css will update after changes to your .scss files.
+
+
+## For Homepage - SP17
+
+Implemented success messages using sweetalert2 package
+

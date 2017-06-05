@@ -14,8 +14,10 @@ import {
   getMonth,
   getMonthName,
   getCurrentMonthName,
-  getAllStudentsLeaderboard,
-  getAllStudentsHomeworkPerMonth
+  getPrevMonthIndex,
+
+  getAllStudentsPointsPerMonth,
+  getIndivPoints
 } from './firebase.js';
 
 
@@ -83,8 +85,8 @@ class ClassRoom extends Component {
     let totalMonths = 6;
     let monthsArray = [];
 
-    // mod = ((n % m) + m) % m
-    let currentMonth = (((getMonth() - totalMonths) % 12) + 12) % 12;
+    // get index of month from totalMonths ago
+    let currentMonth = getPrevMonthIndex(totalMonths);
 
     // print the current and previous 5 months
     for (var index = 0; index < totalMonths; index++) {
@@ -116,7 +118,7 @@ class ClassRoom extends Component {
     // create bar of points for each month
     for (var index = 0; index < totalMonths; index++) {
       // get height of the bar based on points for the month
-      let barHeightHomework = pointsArray[index];
+      let barHeight = pointsArray[index];
 
       barsArray.push(
         <div className = "bar-container">
@@ -124,9 +126,9 @@ class ClassRoom extends Component {
           <div
             className = "graph-bar"
             style = {{
-              height: barHeightHomework
+              height: barHeight
             }}>
-            <h4>{barHeightHomework}</h4>
+            <h4>{barHeight}</h4>
           </div>
 
         </div>
@@ -138,7 +140,8 @@ class ClassRoom extends Component {
 
         <div className = "graph-num">
         </div>
-          {barsArray}
+
+        {barsArray}
       </div>
     );
   }
@@ -198,19 +201,15 @@ class ClassRoom extends Component {
    * gets array of total points of all students per month
    */
   getTotalPoints() {
-    return getAllStudentsHomeworkPerMonth(this.state.user);
+    return getAllStudentsPointsPerMonth(this.state.user);
   }
 
   /*
    * gets points of an individual student
    */
   getPoints(){
-    let currentUsers = this.state.user;
     let activeUser = this.state.activeUser;
-    let index = this.state.index;
-    let date = getYear() + "-" + getMonth();
-    console.log(currentUsers[index].points[date].totalPoints);
-    return currentUsers[index].points[date].totalPoints;
+    return getIndivPoints(activeUser);
   }
 
 
@@ -219,7 +218,6 @@ class ClassRoom extends Component {
    */
   render() {
     let barHeightHomework = 0;
-    let barHeightVolunteer = 0;
     let increment = 0;
 
 /*
@@ -232,27 +230,31 @@ class ClassRoom extends Component {
     let selected = this.state.activeUser;
     let top = "";
     let bottom = "";
-    let pointsArray = [];
+    let totalArray = [];
+    let volunteeringArray = [];
 
     if (selected.first == "Welcome"){
       top = "Total # of Points Earned per Month"
       bottom = ""
-      pointsArray = this.getTotalPoints();
+      totalArray = this.getTotalPoints();
+
 
     } else {
       top = selected.first;
       bottom = selected.last;
-      numPoints = this.getPoints();
+      totalArray = this.getPoints();
+
+      /*
       increment = 400/(this.getPoints()*7);
       barHeightHomework = increment * this.getPoints();
-      console.log(barHeightHomework);
+      */
     }
 
     return (
       <div className = "classroom">
         <div className = "left-panel">
 
-          <h1>Homework Completed for Each Month</h1>
+          <h1>Homework & Volunteering</h1>
           <h2>{top} {bottom}</h2>
 
           <div className = "label">
@@ -260,7 +262,7 @@ class ClassRoom extends Component {
           </div>
 
           <div className = "graph">
-              {this.renderBars(pointsArray)}
+              {this.renderBars(totalArray)}
           </div>
 
           {this.renderXAxis()}

@@ -65,7 +65,7 @@ class Home extends Component {
         if (!(yearMonth in currentUsers[index].points)) {
             currentUsers[index].points[yearMonth] = {
                 "completedHomework": 0,
-                "month": "April",
+                "month": "June",
                 "totalPoints": 0,
                 "year": 2017
             };
@@ -114,9 +114,7 @@ class Home extends Component {
         }
 
 
-        if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
-            currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
-        }
+
 
         if (value < 0) {
           window.alert("Please enter a positive number.");
@@ -124,14 +122,19 @@ class Home extends Component {
 
         if (value > 0) {
 
+          if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
+              currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
+          }
+
             if(isHomework){
               currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
               currentUsers[index].points[yearMonth].completedHomework += value;
-              currentUsers[index].completedHomework += value;
+              currentUsers[index].totalHomework += value;
             }
             else {
               currentUsers[index].points[yearMonth][date[2]]["V"] += value;
               currentUsers[index].points[yearMonth].completedVolunteering += value;
+              currentUsers[index].totalVolunteering += value;
             }
 
             currentUsers[index].totalPoints += value;
@@ -158,6 +161,10 @@ class Home extends Component {
 
         // reset points for student
         else if (this.state.reset == 1) {
+
+
+
+
           swal({
             title: 'Are you sure?',
             text: 'Confirm point reset for ' + currentUsers[index].first+'?',
@@ -186,7 +193,7 @@ class Home extends Component {
 
           currentUsers[index].points[yearMonth][date[2]]["V"] =0;
 
-
+          //currentUsers[index].points[yearMonth][date[2]] = undefined;
           currentUsers[index].points[yearMonth].totalPoints =0;
           currentUsers[index].totalPoints =0;
           currentUsers[index].jumps =0;
@@ -220,6 +227,7 @@ class Home extends Component {
         this.setState ({newStudentName: event.target.value});
     }
 
+// Add new student
     addNewStudentName() {
         var firstName = this.state.newStudentName.split(" ")[0];
         var lastName = this.state.newStudentName.split(" ")[1];
@@ -229,7 +237,7 @@ class Home extends Component {
             alert("PLease enter in the full student's name, separated by a space.");
         }else{
             this.state.base.push('users', {
-                data: {first: firstName, last: lastName}
+                data: {first: firstName, last: lastName, totalHomework: 0, totalVolunteering: 0, totalPoints: 0}
             }).catch(error => {
                 alert("Oh no!\n\n" + error);
             });
@@ -249,7 +257,7 @@ class Home extends Component {
             let currentUser = currentUsers[index];
 
             let homeworkCompleted;
-            if ("points" in currentUser && yearMonth in currentUser.points && date[2] in currentUser.points[yearMonth]) {
+            if ("points" in currentUser && yearMonth in currentUser.points && currentUser.points[yearMonth][date[2]] && (currentUser.points[yearMonth][date[2]]["HW"] != 0)) {
                 homeworkCompleted = <div className="chart-table-row-completed">Completed</div>;
             } else {
                 homeworkCompleted = <div className="chart-table-row-notcompleted">Not Completed</div>;
@@ -306,10 +314,10 @@ class Home extends Component {
                         {this.renderTable()}
                         <form>
                         <label>
-                        Name: 
+                        New Student Name:
                          <input type="text" onChange={this.updateNewStudentName} name="name" />
                         </label>
-                       <input type="submit" onClick={this.addNewStudentName} value="Submit" />
+                       <input type="submit" onClick={this.addNewStudentName} className="submit-button" value="Submit" />
                         </form>
 
                     </div>
@@ -329,7 +337,7 @@ class Home extends Component {
                           <input type="radio" name="gender" value="female" onClick={()=>{isHomework = false;}} />  Volunteering
                         </form>
                         <button type="button" onClick={this.addValue.bind(this,isHomework)} className="add-button">Add</button>
-                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)}>Reset Points</button></center>
+                        <center><button type="button" onClick={this.isReset(), this.addValue.bind(this,isHomework)} className="reset-button">Reset Points</button></center>
 
 
                     </div>
