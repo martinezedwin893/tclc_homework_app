@@ -1,240 +1,305 @@
-import React, { Component } from 'react';
-import {
-  Router,
-  Route,
-  Link,
-  IndexLink,
-  IndexRoute,
-  hashHistory,
-  browserHistory
-} from 'react-router';
-import {
-  getDate,
-  getYear,
-  getMonth,
-  getMonthName,
-  getCurrentMonthName,
-  getAllStudentsLeaderboard
-} from './firebase.js';
+import React, {Component} from 'react';
+import {Router, Route, Link, IndexLink, IndexRoute, hashHistory, browserHistory} from 'react-router';
+
+import swal from 'sweetalert2'
+import {getDate} from './firebase.js';
+
 
 
 class Settings extends Component {
 
-  /*
-   * set up classroom
-   */
-  constructor(props, context) {
-      super(props);
-      this.context = context;
 
-      this.state = {
-          user: {},
-          activeUser: {
-            "first": "Welcome",
-            "last": "Back!"
-          },
-          index: 0,
-          test: 0
-      };
-  }
+    mixins: [ReactFireMixin];
 
-  /*
-   * set up Firebase
-   */
-  componentWillMount() {
-      let Rebase = require('re-base');
-      let base = Rebase.createClass({
-          apiKey: "AIzaSyD_l86M8ZSZilyYVx2nzIsK4s-UT8Hw66s",
-          authDomain: "homework-app-81383.firebaseapp.com",
-          databaseURL: "https://homework-app-81383.firebaseio.com",
-          storageBucket: "homework-app-81383.appspot.com",
-          messagingSenderId: "79481264901"
-      }, 'base');
+    constructor(props, context) {
+        super(props);
+        this.context = context;
 
-      base.syncState('users', {
-          context: this,
-          state: 'user'
-      });
-  }
-
-  /*
-   * actions that occur when user clicks on a row
-   */
-  clickRow(index) {
-      console.log(index);
-      let currentUsers = this.state.user;
-      let activeUser = currentUsers[index];
-      // document.getElementById(index).classList.add("selected");
-      console.log(document.getElementById(index).classList);
-
-      this.setState({
-          activeUser: activeUser,
-          index: index
-      });
-
-      console.log(activeUser);
-  }
-
-  /*
-   * Renders x-axis
-   */
-  renderXAxis() {
-    let totalMonths = 6;
-    let monthsArray = [];
-
-    // mod = ((n % m) + m) % m
-    let currentMonth = (((getMonth() - totalMonths) % 12) + 12) % 12;
-
-    // print the current and previous 5 months
-    for (var index = 0; index < totalMonths; index++) {
-      monthsArray.push(
-        <div className = "month">
-          <h4>{getMonthName(currentMonth)}</h4>
-        </div>
-      );
-
-      currentMonth = (currentMonth + 1) % 12;
+        this.state = {
+            user: {},
+            activeUser: {"first": "Welcome", "last": "Back!"},
+            index: 0,
+            test: 0,
+            reset: 0,
+            show: false,
+            base: null,
+            newStudentName: ""
+        };
     }
 
-    return(
-      <div className = "x-axis">
-        {monthsArray}
-      </div>
-    );
-  }
 
-  /*
-   * Renders table with names
-   */
-  renderTable() {
+    componentWillMount() {
+        let Rebase = require('re-base');
+        this.state.base = Rebase.createClass({
+            apiKey: "AIzaSyD_l86M8ZSZilyYVx2nzIsK4s-UT8Hw66s",
+            authDomain: "homework-app-81383.firebaseapp.com",
+            databaseURL: "https://homework-app-81383.firebaseio.com",
+            storageBucket: "homework-app-81383.appspot.com",
+            messagingSenderId: "79481264901"
+        }, 'base');
+
+        this.state.base.syncState('users', {
+            context: this,
+            state: 'user'
+        });
+    }
+
+
+    componentDidMount(){
+
       let currentUsers = this.state.user;
       let date = getDate();
       let yearMonth = date[0] + "-" + date[1];
-      let usersArray = [];
-      let count = Object.keys(currentUsers).length;
 
       for (let index in currentUsers) {
 
-          let currentUser = currentUsers[index];
+        //If points don't exist, push an empty object.
+        if(!("points" in currentUsers[index])){
+          currentUsers[index].points = {};
+        }
 
-          // If condition to switch colors
-          if (count % 2 == 1) {
-              usersArray.push(
-                  <div
-                    onClick = {this.clickRow.bind(this, index)}
-                    className = "chart-table-row isGray"
-                    key = {index}
-                    id = {index}>
-                      <div className = "chart-table-row-name">
-                        {currentUser.first} {currentUser.last}
-                      </div>
-                  </div>);
+        //If current month doesn't exist, push one.
+        if (!(yearMonth in currentUsers[index].points)) {
+            currentUsers[index].points[yearMonth] = {
+                "completedHomework": 0,
+                "month": "April",
+                "totalPoints": 0,
+                "year": 2017
+            };
+        }
 
-          } else {
-              usersArray.push(
-                  <div
-                    onClick = {this.clickRow.bind(this, index)}
-                    className = "chart-table-row"
-                    key = {index}
-                    id = {index}>
-                      <div className = "chart-table-row-name">
-                        {currentUser.first} {currentUser.last}
-                      </div>
-                  </div>);
-          }
-
-          count++;
       }
 
-      return (
-          <div className = "chart-table">
-            {usersArray}
-          </div>
-      );
-  }
-
-  /*
-   * gets total points of all students
-   */
-  getAllPoints(){
-    let pArray = getAllStudentsLeaderboard(this.state.user);
-    let points = 0;
-
-    for (var key in pArray) {
-      points += pArray[key].totalPoints;
+      this.setState({
+          user: currentUsers
+      });
     }
 
-    return points;
-  }
+    // modified version of clickRow()
+    deleteUser(index) {
+        console.log(index);
+        let currentUsers = this.state.user;
+        let activeUser = currentUsers[index];
+        let firstName = activeUser.first;
+        let lastName = activeUser.last;
+        var base = this.state.base;
+        //document.getElementById(index).classList.add("selected");
+        //console.log(document.getElementById(index).classList);
 
-  /*
-   * gets points of an individual student
-   */
-  getPoints(){
-    let currentUsers = this.state.user;
-    let activeUser = this.state.activeUser;
-    let index = this.state.index;
-    let date = getYear() + "-" + getMonth();
-    console.log(currentUsers[index].points[date].totalPoints);
-    return currentUsers[index].points[date].totalPoints;
-  }
+        /*
+        this.setState({
+            activeUser: activeUser,
+            index: index
+        });
+        */
 
-  /*
-   * render the Settings page
-   */
-  render() {
-    let barHeightHomework = 0;
-    let barHeightVolunteer = 0;
-    let increment = 0;
+        // show dialog to confirm deletion
+        swal({
+            title: 'Are you sure?',
+            text: 'Confirm deletion of student ' + firstName + ' ' + lastName + '?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then(function () {
+            base.remove('users/' + index).then(() => {
+                swal(
+                    "Successfully Deleted!",
+                    "The student " + firstName + " " + lastName + " has been removed.",
+                    "success"
+                );
+            }).catch(error => {
+                swal(
+                    "An error has occurred.",
+                    error,
+                    "error"
+                );
+            });
+        });
 
-    if(this.getAllPoints()){
-      increment = 400/(this.getAllPoints()*3);
-      barHeightHomework = increment * this.getAllPoints();
+        //console.log(activeUser);
     }
 
-    let selected = this.state.activeUser;
-    let top = "";
-    let bottom = "";
-    let numPoints = 0;
-
-    if(selected.first == "Welcome"){
-      top = "Average # of Points Earned"
-      bottom = ""
-      numPoints = this.getAllPoints();
-
-    } else{
-      top = selected.first;
-      bottom = selected.last;
-      numPoints = this.getPoints();
-      increment = 400/(this.getPoints()*7);
-      barHeightHomework = increment * this.getPoints();
-      console.log(barHeightHomework);
+    isReset() {
+      this.state.reset = 1;
     }
 
-    return (
-      <div className = "settings">
-        <div className = "left-panel">
+    addValue(isHomework) {
+        let date = getDate();
+        let yearMonth = date[0] + "-" + date[1];
+        let value = document.getElementById("input-add").value;
 
-          <h3>Account Details</h3>
-          <h3>Students</h3>
-          
+        value = parseInt(value);
 
-        </div>
 
-        <div className = "right-panel">
-          <div className = "chart-header-names">Name</div>
-          {this.renderTable()}
-          <form>
-  <label>
-    Name:
-    <input type="text" name="name" />
-  </label>
-  <input type="submit" value="Submit" />
-</form>
-        </div>
-      </div>
-    )
-  }
+        let currentUsers = this.state.user;
+        let activeUser = this.state.activeUser;
+        let index = this.state.index;
+
+        if (activeUser.first == "Welcome") {
+            return;
+        }
+
+
+        if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
+            currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
+        }
+
+        if (value < 0) {
+          window.alert("Please enter a positive number.");
+        }
+
+        if (value > 0) {
+
+            if(isHomework){
+              currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
+              currentUsers[index].points[yearMonth].completedHomework += value;
+              currentUsers[index].completedHomework += value;
+            }
+            else {
+              currentUsers[index].points[yearMonth][date[2]]["V"] += value;
+              currentUsers[index].points[yearMonth].completedVolunteering += value;
+            }
+
+            currentUsers[index].totalPoints += value;
+            currentUsers[index].points[yearMonth].totalPoints += value;
+            currentUsers[index].jumps += value;
+
+            swal({
+              title: 'Are you sure?',
+              text: 'Confirm addition of ' + value +
+              ' points to ' +currentUsers[index].first+'?',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, add points!'
+            }).then(function () {
+              swal(
+                'Successfully Added!',
+                value + ' points added to '+ currentUsers[index].first+'!',
+                'success'
+              )
+            })
+        }
+
+        // reset points for student
+        else if (this.state.reset == 1) {
+          swal({
+            title: 'Are you sure?',
+            text: 'Confirm point reset for ' + currentUsers[index].first+'?',
+            type: 'warning',
+            showCancelButton:true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, reset points!'
+          }).then(function () {
+            swal(
+              'Successfully Reset!',
+              'Points reset for '+ currentUsers[index].first+'!',
+              'success'
+            )
+          })
+
+        /*  swal(
+            'Successfully Reset!',
+            'Points reset for ' + currentUsers[index].first+'!',
+            'success'
+          )
+          */
+          this.state.reset = 0;
+          currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
+          currentUsers[index].points[yearMonth].completedHomework =0;
+
+          currentUsers[index].points[yearMonth][date[2]]["V"] =0;
+
+
+          currentUsers[index].points[yearMonth].totalPoints =0;
+          currentUsers[index].totalPoints =0;
+          currentUsers[index].jumps =0;
+
+        }
+        this.setState({
+            user: currentUsers
+        });
+
+
+        //set box value back to 0
+        document.getElementById("input-add").value = 0;
+
+
+    }
+
+    decrement() {
+        document.getElementById("input-add").value--;
+    }
+
+    increment() {
+        document.getElementById("input-add").value++;
+    }
+
+
+    successAlert() {
+        window.alert("SUCCESS");
+    }
+
+    /*Renders table with names*/
+    renderTable() {
+        let currentUsers = this.state.user;
+        let date = getDate();
+        let yearMonth = date[0] + "-" + date[1];
+        let usersArray = [];
+        let count = Object.keys(currentUsers).length;
+
+        for (let index in currentUsers) {
+
+            let currentUser = currentUsers[index];
+
+
+            usersArray.push(
+                <div className={(count % 2 == 1) ? "chart-table-row isGray" : "chart-table-row"}
+                    key={index}
+                    id={index}>
+                    <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
+                    <button className="chart-table-row-notcompleted" onClick={this.deleteUser.bind(this, index)}>Delete</button>
+                </div>
+            );
+
+            count++;
+        }
+
+        return (
+            <div className="chart-table">{usersArray}</div>
+        );
+    }
+
+    render() {
+
+        let selected = this.state.activeUser;
+        let d = new Date();
+        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let weekday = days[d.getDay()];
+        let day = d.getDate();
+        let month = months[d.getMonth()];
+        let year = d.getFullYear();
+
+        return (
+            <div className="home">
+                  <div className="left-panel">
+                    <div className="chart">
+                        <div className="chart-header">
+                            <div className="chart-header-names">Name</div>
+                        </div>
+                        {this.renderTable()}
+                    </div>
+                </div>
+                
+            </div>
+        );
+    }
 }
+
 
 export default Settings
