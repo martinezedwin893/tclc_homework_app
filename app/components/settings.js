@@ -286,7 +286,7 @@ class Settings extends Component {
         let year = d.getFullYear();
 
         return (
-            <div className="home">
+            <div className="settings">
                   <div className="left-panel">
                     <div className="chart">
                         <div className="chart-header">

@@ -230,7 +230,8 @@ class Home extends Component {
         }else{
             this.state.base.push('users', {
                 data: {first: firstName, last: lastName}
-            }).catch(error => {
+            })
+            .catch(error => {
                 alert("Oh no!\n\n" + error);
             });
         }
