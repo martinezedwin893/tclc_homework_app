@@ -13,7 +13,6 @@
   .classroom .left-panel {
     overflow-y: scroll;
     width: 70vw;
-    height: 90vh;
     border-right: 1px solid #D8D8D8;
     padding: 0 5%;
     height: 95vh;
@@ -105,8 +104,8 @@
     height: 90vh;
     position: relative;
     top: 30px;
-    padding: 0 3vw;
-    overflow-y: scroll;
+    padding: 0 3vw 3vw;
+    bottom: 30px;
   }
 
     .classroom .right-panel .chart {
@@ -126,6 +125,7 @@
 
     .classroom .right-panel .chart-table {
       margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     .classroom .right-panel .chart-table-row {
