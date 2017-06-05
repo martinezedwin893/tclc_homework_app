@@ -227,6 +227,7 @@ class Home extends Component {
         this.setState ({newStudentName: event.target.value});
     }
 
+// Add new student
     addNewStudentName() {
         var firstName = this.state.newStudentName.split(" ")[0];
         var lastName = this.state.newStudentName.split(" ")[1];
