@@ -188,16 +188,6 @@ export function getIndivPoints( student ) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 /*
  * Return number of points for completed homework each month for a student
  */

@@ -131,7 +131,7 @@ class Settings extends Component {
 
         return (
             <div className="settings">
-          
+
                   <div className="left-panel">
                     <div className="chart">
                         <div className="chart-header">

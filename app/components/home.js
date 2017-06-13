@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Router, Route, Link, IndexLink, IndexRoute, hashHistory, browserHistory} from 'react-router';
 
 import swal from 'sweetalert2'
-import {getDate} from './firebase.js';
+import {getDate, getCurrentMonthName} from './firebase.js';
 
 
 
@@ -65,7 +65,7 @@ class Home extends Component {
         if (!(yearMonth in currentUsers[index].points)) {
             currentUsers[index].points[yearMonth] = {
                 "completedHomework": 0,
-                "month": "June",
+                "month": getCurrentMonthName(),
                 "totalPoints": 0,
                 "year": 2017
             };
@@ -239,10 +239,10 @@ class Home extends Component {
             this.state.base.push('users', {
                 data: {first: firstName, last: lastName, totalHomework: 0, totalVolunteering: 0, totalPoints: 0}
             }).catch(error => {
-                alert("Oh no!\n\n" + error);
-            });
+                  alert("Oh no!\n\n" + error);
+              });
+          }
         }
-    }
 
     /*Renders table with names*/
     renderTable() {

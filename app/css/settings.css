@@ -21,7 +21,6 @@
   }
 
     
-
     .settings .left-panel .chart {
       padding: 5%;
       position: relative;
@@ -36,7 +35,6 @@
       }
 
        
-
       .settings .left-panel .chart-table {
         margin-top: 10px;
         margin-bottom: 20px;
@@ -51,7 +49,7 @@
           border: 2px solid transparent;
         }
 
-          
+        
 
           .settings .left-panel .chart-table-row-deleted {
             color: #FD5C63;
@@ -67,7 +65,7 @@
           background: #F2F2F2;
         }
 
- 
+
 
     .settings input[type=text] {
       margin-bottom: 20px;
