@@ -7,133 +7,67 @@
   top: 60px;
   vertical-align: top;
   display: flex;
-  overflow: hidden;
 }
+
+  .settings .selected {
+    border: 2px solid #61BBE3;
+  }
 
   .settings .left-panel {
     overflow-y: scroll;
     width: 70vw;
-    height: 90vh;
-    border-right: 1px solid #D8D8D8;
-    padding: 0 5%;
     height: 95vh;
-  }
-    .settings .left-panel .label {
-      margin-top: 50px;
-      width: 45px;
-      height: 400px;
-      float: left;
-      display: inline-block;
-      padding: 0;
-    }
-
-    .settings .left-panel .graph {
-      position: relative;
-      padding: 0 3%;
-      margin-top: 50px;
-      width: 90%;
-      height: 400px;
-      border-left: 2px solid #D8D8D8;
-      border-bottom: 2px solid #D8D8D8;
-      display: inline-block;
-    }
-
-    .settings .left-panel .graph-bar {
-      position: absolute;
-      bottom: 0;
-      background: #61BBE3;
-      vertical-align: bottom;
-      text-align: center;
-      width: 100px;
-    }
-
-    .settings .left-panel .graph-bar h4 {
-      position: relative;
-      top: -30px;
-      color: #000000;
-    }
-
-    .settings .left-panel .x-axis {
-      padding: 0 3%;
-      overflow: hidden;
-      position: relative;
-      margin-left: 38px;
-    }
-
-    .settings .left-panel .x-axis .month {
-      text-align: center;
-      width: 125px;
-      float: left;
-    }
-
-    .settings .left-panel .month h4 {
-      font-size: 16px;
-    }
-
-  /* Right panel */
-  .settings .right-panel {
-    overflow-y: scroll;
-    width: 30vw;
-    height: 90vh;
-    position: relative;
-    top: 30px;
-    padding: 0 3vw;
+    border-right: 1px solid #D8D8D8;
   }
 
-    .settings .right-panel .chart {
+    
+
+    .settings .left-panel .chart {
       padding: 5%;
       position: relative;
       top: 30px;
+      overflow-y: scroll;
     }
 
-    .settings.right-panel .chart-header {
-      display: flex;
-      padding: 0 5vw;
-    }
+      .settings .left-panel .chart-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5vw;
+      }
 
-    .settings .right-panel .chart-header-names {
-      padding-left: 3%;
-      font-weight: bold;
-    }
+       
 
-    .settings .right-panel .chart-table {
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
+      .settings .left-panel .chart-table {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
 
-    .settings .right-panel .chart-table-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 3%;
-      height: 60px;
-      border: 2px solid transparent;
-    }
+        .settings .left-panel .chart-table-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 3%;
+          height: 60px;
+          border: 2px solid transparent;
+        }
 
-    .settings .right-panel .chart-table-row-completed {
-      color: #7ED321;
-      border-color: #7ED321;
-    }
+          
 
-    .settings .right-panel .chart-table-row-notcompleted {
-      color: #FD5C63;
-      border-color: #FD5C63;
-    }
+          .settings .left-panel .chart-table-row-deleted {
+            color: #FD5C63;
+            border-color: #FD5C63;
+          }
 
-    .settings .right-panel .chart-table-row-completed, .settings .right-panel .chart-table-row-notcompleted {
-      margin-right: 100px;
-      border: 2px solid;
-      border-radius: 10px;
-      padding: 2px 5px;
-    }
 
-    .settings .right-panel .chart-table-row:hover {
-      border: 2px solid #61BBE3;
-    }
+        .settings .left-panel .chart-table-row:hover {
+          border: 2px solid #61BBE3;
+        }
 
-    .settings .right-panel .chart-table .isGray {
-      background: #F2F2F2;
-    }
+        .settings .left-panel .chart-table .isGray {
+          background: #F2F2F2;
+        }
+
+ 
 
     .settings input[type=text] {
       margin-bottom: 20px;
