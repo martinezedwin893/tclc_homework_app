@@ -17,7 +17,6 @@ class Settings extends Component {
 
         this.state = {
             user: {},
-            activeUser: {"first": "Welcome", "last": "Back!"},
             index: 0,
             test: 0,
             reset: 0,
@@ -56,12 +55,6 @@ class Settings extends Component {
         //document.getElementById(index).classList.add("selected");
         //console.log(document.getElementById(index).classList);
 
-        /*
-        this.setState({
-            activeUser: activeUser,
-            index: index
-        });
-        */
 
         // show dialog to confirm deletion
         swal({
@@ -88,11 +81,6 @@ class Settings extends Component {
             });
         });
 
-        //console.log(activeUser);
-    }
-
-    isReset() {
-      this.state.reset = 1;
     }
 
 
