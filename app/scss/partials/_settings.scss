@@ -14,16 +14,7 @@
     height: 95vh;
     border-right: 1px solid $light-gray;
 
-    .date {
-      width: 70vw;
-      position: fixed;
-      top: 60px;
-      background: $light-gray;
-      text-align: center;
-      height: 30px;
-      padding: 3px;
-      z-index: 100;
-    }
+
 
     .chart {
       padding: 5%;
@@ -36,10 +27,7 @@
         justify-content: space-between;
         padding: 0 5vw;
 
-        &-completed {
-          margin-right: 100px;
-       }
-      }
+
 
       &-table{
         margin-top: 10px;
@@ -52,14 +40,12 @@
           height: 60px;
           border: 2px solid transparent;
 
-         
-
-          &-notcompleted {
+          &-deleted {
             color: $red;
             border-color: $red;
           }
 
-          &-completed, &-notcompleted {
+          &-deleted {
             margin-right: 100px;
             border: 2px solid;
             border-radius: 10px;
@@ -79,5 +65,4 @@
     }
   }
 
- 
-}
+

@@ -17,13 +17,11 @@ class Settings extends Component {
 
         this.state = {
             user: {},
-            activeUser: {"first": "Welcome", "last": "Back!"},
             index: 0,
             test: 0,
             reset: 0,
             show: false,
             base: null,
-            newStudentName: ""
         };
     }
 
@@ -45,35 +43,6 @@ class Settings extends Component {
     }
 
 
-    componentDidMount(){
-
-      let currentUsers = this.state.user;
-      let date = getDate();
-      let yearMonth = date[0] + "-" + date[1];
-
-      for (let index in currentUsers) {
-
-        //If points don't exist, push an empty object.
-        if(!("points" in currentUsers[index])){
-          currentUsers[index].points = {};
-        }
-
-        //If current month doesn't exist, push one.
-        if (!(yearMonth in currentUsers[index].points)) {
-            currentUsers[index].points[yearMonth] = {
-                "completedHomework": 0,
-                "month": "April",
-                "totalPoints": 0,
-                "year": 2017
-            };
-        }
-
-      }
-
-      this.setState({
-          user: currentUsers
-      });
-    }
 
     // modified version of clickRow()
     deleteUser(index) {
@@ -86,12 +55,6 @@ class Settings extends Component {
         //document.getElementById(index).classList.add("selected");
         //console.log(document.getElementById(index).classList);
 
-        /*
-        this.setState({
-            activeUser: activeUser,
-            index: index
-        });
-        */
 
         // show dialog to confirm deletion
         swal({
@@ -118,137 +81,12 @@ class Settings extends Component {
             });
         });
 
-        //console.log(activeUser);
     }
 
-    isReset() {
-      this.state.reset = 1;
-    }
-
-    addValue(isHomework) {
-        let date = getDate();
-        let yearMonth = date[0] + "-" + date[1];
-        let value = document.getElementById("input-add").value;
-
-        value = parseInt(value);
-
-
-        let currentUsers = this.state.user;
-        let activeUser = this.state.activeUser;
-        let index = this.state.index;
-
-        if (activeUser.first == "Welcome") {
-            return;
-        }
-
-
-        if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
-            currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
-        }
-
-        if (value < 0) {
-          window.alert("Please enter a positive number.");
-        }
-
-        if (value > 0) {
-
-            if(isHomework){
-              currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
-              currentUsers[index].points[yearMonth].completedHomework += value;
-              currentUsers[index].completedHomework += value;
-            }
-            else {
-              currentUsers[index].points[yearMonth][date[2]]["V"] += value;
-              currentUsers[index].points[yearMonth].completedVolunteering += value;
-            }
-
-            currentUsers[index].totalPoints += value;
-            currentUsers[index].points[yearMonth].totalPoints += value;
-            currentUsers[index].jumps += value;
-
-            swal({
-              title: 'Are you sure?',
-              text: 'Confirm addition of ' + value +
-              ' points to ' +currentUsers[index].first+'?',
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, add points!'
-            }).then(function () {
-              swal(
-                'Successfully Added!',
-                value + ' points added to '+ currentUsers[index].first+'!',
-                'success'
-              )
-            })
-        }
-
-        // reset points for student
-        else if (this.state.reset == 1) {
-          swal({
-            title: 'Are you sure?',
-            text: 'Confirm point reset for ' + currentUsers[index].first+'?',
-            type: 'warning',
-            showCancelButton:true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, reset points!'
-          }).then(function () {
-            swal(
-              'Successfully Reset!',
-              'Points reset for '+ currentUsers[index].first+'!',
-              'success'
-            )
-          })
-
-        /*  swal(
-            'Successfully Reset!',
-            'Points reset for ' + currentUsers[index].first+'!',
-            'success'
-          )
-          */
-          this.state.reset = 0;
-          currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
-          currentUsers[index].points[yearMonth].completedHomework =0;
-
-          currentUsers[index].points[yearMonth][date[2]]["V"] =0;
-
-
-          currentUsers[index].points[yearMonth].totalPoints =0;
-          currentUsers[index].totalPoints =0;
-          currentUsers[index].jumps =0;
-
-        }
-        this.setState({
-            user: currentUsers
-        });
-
-
-        //set box value back to 0
-        document.getElementById("input-add").value = 0;
-
-
-    }
-
-    decrement() {
-        document.getElementById("input-add").value--;
-    }
-
-    increment() {
-        document.getElementById("input-add").value++;
-    }
-
-
-    successAlert() {
-        window.alert("SUCCESS");
-    }
 
     /*Renders table with names*/
     renderTable() {
         let currentUsers = this.state.user;
-        let date = getDate();
-        let yearMonth = date[0] + "-" + date[1];
         let usersArray = [];
         let count = Object.keys(currentUsers).length;
 
@@ -262,7 +100,7 @@ class Settings extends Component {
                     key={index}
                     id={index}>
                     <div className="chart-table-row-name">{currentUser.first} {currentUser.last}</div>
-                    <button className="chart-table-row-notcompleted" onClick={this.deleteUser.bind(this, index)}>Delete</button>
+                    <button className="chart-table-row-deleted" onClick={this.deleteUser.bind(this, index)}>Delete</button>
                 </div>
             );
 
@@ -277,16 +115,11 @@ class Settings extends Component {
     render() {
 
         let selected = this.state.activeUser;
-        let d = new Date();
-        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let weekday = days[d.getDay()];
-        let day = d.getDate();
-        let month = months[d.getMonth()];
-        let year = d.getFullYear();
+       
 
         return (
             <div className="settings">
+
                   <div className="left-panel">
                     <div className="chart">
                         <div className="chart-header">
