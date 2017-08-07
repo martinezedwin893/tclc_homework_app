@@ -220,13 +220,6 @@ class ClassRoom extends Component {
     let barHeightHomework = 0;
     let increment = 0;
 
-/*
-    if(this.getTotalPoints()){
-      increment = 400/(this.getTotalPoints()*3);
-      barHeightHomework = increment * this.getTotalPoints();
-    }
-*/
-
     let selected = this.state.activeUser;
     let top = "";
     let bottom = "";
@@ -243,11 +236,6 @@ class ClassRoom extends Component {
       top = selected.first;
       bottom = selected.last;
       totalArray = this.getPoints();
-
-      /*
-      increment = 400/(this.getPoints()*7);
-      barHeightHomework = increment * this.getPoints();
-      */
     }
 
     return (
