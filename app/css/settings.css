@@ -1,0 +1,74 @@
+/*
+ * Settings Styles
+ */
+.settings {
+  width: 100vw;
+  position: relative;
+  top: 60px;
+  vertical-align: top;
+  display: flex;
+}
+
+  .settings .selected {
+    border: 2px solid #61BBE3;
+  }
+
+  .settings .left-panel {
+    overflow-y: scroll;
+    width: 70vw;
+    height: 95vh;
+    border-right: 1px solid #D8D8D8;
+  }
+
+    
+    .settings .left-panel .chart {
+      padding: 5%;
+      position: relative;
+      top: 30px;
+      overflow-y: scroll;
+    }
+
+      .settings .left-panel .chart-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5vw;
+      }
+
+       
+      .settings .left-panel .chart-table {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+
+        .settings .left-panel .chart-table-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 3%;
+          height: 60px;
+          border: 2px solid transparent;
+        }
+
+        
+
+          .settings .left-panel .chart-table-row-deleted {
+            color: #FD5C63;
+            border-color: #FD5C63;
+          }
+
+
+        .settings .left-panel .chart-table-row:hover {
+          border: 2px solid #61BBE3;
+        }
+
+        .settings .left-panel .chart-table .isGray {
+          background: #F2F2F2;
+        }
+
+
+
+    .settings input[type=text] {
+      margin-bottom: 20px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }

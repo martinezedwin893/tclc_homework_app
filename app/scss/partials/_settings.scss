@@ -1,0 +1,68 @@
+.settings {
+  width: 100vw;
+  position: relative;
+  top: 60px;
+  vertical-align: top;
+  display: flex;
+
+  .selected {
+    border: 2px solid $primary-blue;
+  }
+
+  .left-panel {
+    width: 70vw;
+    height: 95vh;
+    border-right: 1px solid $light-gray;
+
+
+
+    .chart {
+      padding: 5%;
+      position: relative;
+      top: 30px;
+      overflow-y: scroll;
+
+      &-header{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5vw;
+
+
+
+      &-table{
+        margin-top: 10px;
+
+        &-row{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 3%;
+          height: 60px;
+          border: 2px solid transparent;
+
+          &-deleted {
+            color: $red;
+            border-color: $red;
+          }
+
+          &-deleted {
+            margin-right: 100px;
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 2px 5px;
+          }
+        }
+
+        &-row:hover{
+          border: 2px solid $primary-blue;
+        }
+
+        .isGray {
+          background: $table-gray;
+        }
+
+      }
+    }
+  }
+
+
