@@ -5,12 +5,14 @@ This is a TCLC Homework Helper App written in React.
 ## To Start
 
 Click Clone/download 
-Copy link
-Open “Terminal” if using Mac or “Command line” if using Windows
 
+Copy link
+
+Open “Terminal” if using Mac or “Command line” if using Windows
+```
 cd Desktop
 git clone https://github.com/paolomartinez/tclc_homework_app 
-
+``
 
 and press enter
 You should see a confirmation message with "......done" meaning you successfully cloned the repository
