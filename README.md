@@ -2,36 +2,19 @@
 
 This is a TCLC Homework Helper App written in React.
 
-## To Start
+## Prerequisites 
 
-Click Clone/download 
 
-Copy link
+## Installing
 
-Open “Terminal” if using Mac or “Command line” if using Windows
-```
-cd Desktop
-git clone https://github.com/paolomartinez/tclc_homework_app 
-``
 
-and press enter
-You should see a confirmation message with "......done" meaning you successfully cloned the repository
-
-## Download and install programs
-Node.js:
-https://nodejs.org/en/
-For windows and macOS: download version 8.9.1 LTS
-
-Sass:
-http://sass-lang.com/
-Click the “Install” tab on the upper-left hand corner
-Scroll down on the page and click on the link that says “koala”
-Download version 2.2.0
+## To Start 
 
 ```
 npm install
 npm start
 ```
+
 
 Go to [http://localhost:8100/](http://localhost:8100/ "http://localhost:8100/") in your web-browser
 
