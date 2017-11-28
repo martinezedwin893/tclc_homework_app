@@ -19,13 +19,8 @@ https://nodejs.org/en/
 
 Sass
 ```
-http://sass-lang.com/
+sudo gem install sass
 ```
-Click the “Install” tab on the upper-left hand corner
-
-Scroll down on the page and click on the link that says “Koala”
-
-Download version 2.2.0
 
 After you finish downloading and installing, open up your terminal to confirm you have the right versions. For each, you should see the version
 that corresponds to the one you just downloaded.
