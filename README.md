@@ -2,6 +2,17 @@
 
 This is a TCLC Homework Helper App written in React.
 
+## Getting Started
+Open "Terminal" if using Mac or "Command Line" if using Windows.
+```
+git clone https://github.com/paolomartinez/tclc_homework_app
+```
+You should see a confirmation message with "......done"
+
+## Prerequisites
+
+## Installing
+
 ## To Start
 
 ```
@@ -27,4 +38,3 @@ If you keep this running, the css will update after changes to your .scss files.
 ## For Homepage - SP17
 
 Implemented success messages using sweetalert2 package
-
