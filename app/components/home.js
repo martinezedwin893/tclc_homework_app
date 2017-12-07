@@ -118,70 +118,108 @@ class Home extends Component {
           return;
         }
 
-        if (value <= 0) {
-          window.alert("Please enter a positive number.");
-          return;
-        }
-
-
-        if (value > 0) {
-    
-
+        if (this.state.isHomework == true) {
             swal({
-              title: 'Are you sure?',
-              text: 'Confirm addition of ' + value +
-              ' points to ' +currentUsers[index].first+'?',
+              title: 'Adding homework points for ' + currentUsers[index].first + ' ' + currentUsers[index].last,
+              //text: 'Confirm addition of ' + value +
+              //' points to ' +currentUsers[index].first+'?',
               type: 'warning',
-              showCancelButton: true,
+              //showCancelButton: true,
               confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
+              //cancelButtonColor: '#d33',
               confirmButtonText: 'Yes, add points!',
-              closeOnConfirm: false,
-              closeOnCancel: false
-            },function () {
+            }).then (function () {
                 //console.log("result.value is " + result.value);
                 //console.log("result is" + result);
                 swal(
                 'Successfully Added!',
-                value + ' points added to '+ currentUsers[index].first+'!',
+                value + ' homework points added to '+ currentUsers[index].first+'!',
                 'success'
                 )
                   
             })//.catch(swal.noop)
-            
-            // tried to add line of code to initalize fucking points jesus christ
-            if (currentUsers[index].points == undefined){
-              console.log("inside this fucking if statement");
-              currentUsers[index].points = {};
-              console.log("created points for " + currentUsers[index].first);
-              this.setState({
-                user: currentUsers
-              });
-            }
 
-            if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
-              console.log("inside second if statement thing");
-              currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
-            }
-            console.log("isHomework is " + this.state.isHomework);
-       
-            if (this.state.isHomework == true) {
-              currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
-              currentUsers[index].points[yearMonth].completedHomework += value;
-              currentUsers[index].totalHomework += value;
-              this.state.isHomework = false;
-            }
-            else {
-              currentUsers[index].points[yearMonth][date[2]]["V"] += value;
-              currentUsers[index].points[yearMonth].completedVolunteering += value;
-              currentUsers[index].totalVolunteering += value;
-            }
-
-            currentUsers[index].totalPoints += value;
-            currentUsers[index].points[yearMonth].totalPoints += value;
-            currentUsers[index].jumps += value; 
-        
         }
+        else {
+            swal({
+                  title: 'Adding volunteering points for ' + currentUsers[index].first + ' ' + currentUsers[index].last,
+                  //text: 'Confirm addition of ' + value +
+                  //' points to ' +currentUsers[index].first+'?',
+                  type: 'warning',
+                  //showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  //cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, add points!',
+                }).then (function () {
+                    //console.log("result.value is " + result.value);
+                    //console.log("result is" + result);
+                    swal(
+                    'Successfully Added!',
+                    value + ' volunteering points added to '+ currentUsers[index].first+'!',
+                    'success'
+                    )     
+                })
+        }
+
+        // tried to add line of code to initalize fucking points jesus christ
+        if (currentUsers[index].points == undefined){
+          console.log("inside this fucking if statement");
+          currentUsers[index].points = {};
+          console.log("created points for " + currentUsers[index].first);
+          this.setState({
+            user: currentUsers
+          });
+        }
+
+        if (currentUsers[index].points[yearMonth][date[2]] == undefined) {
+          console.log("inside second if statement thing");
+          currentUsers[index].points[yearMonth][date[2]] = {"HW": 0, "V": 0};
+        }
+        console.log("isHomework is " + this.state.isHomework);
+   
+        if (this.state.isHomework == true) {
+          currentUsers[index].points[yearMonth][date[2]]["HW"] += value;
+          currentUsers[index].points[yearMonth].completedHomework += value;
+          currentUsers[index].totalHomework += value;
+
+          if (currentUsers[index].points[yearMonth][date[2]]["HW"] < 0)
+              currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
+
+          if (currentUsers[index].points[yearMonth].completedHomework < 0)
+              currentUsers[index].points[yearMonth].completedHomework = 0;
+
+          if (currentUsers[index].totalHomework < 0)
+              currentUsers[index].totalHomework = 0;
+        }
+        else {
+          currentUsers[index].points[yearMonth][date[2]]["V"] += value;
+          currentUsers[index].points[yearMonth].completedVolunteering += value;
+          currentUsers[index].totalVolunteering += value;
+
+          if (currentUsers[index].points[yearMonth][date[2]]["V"] < 0)
+              currentUsers[index].points[yearMonth][date[2]]["V"] = 0;
+
+          if (currentUsers[index].points[yearMonth].completedVolunteering < 0)
+              currentUsers[index].points[yearMonth].completedVolunteering = 0;
+
+          if (currentUsers[index].totalVolunteering < 0)
+              currentUsers[index].totalVolunteering = 0;
+
+        }
+      
+        currentUsers[index].totalPoints += value;
+        currentUsers[index].points[yearMonth].totalPoints += value;
+        currentUsers[index].jumps += value; 
+
+        if (currentUsers[index].totalPoints < 0)
+          currentUsers[index].totalPoints = 0;
+
+        if (currentUsers[index].points[yearMonth].totalPoints < 0)
+          currentUsers[index].points[yearMonth].totalPoints = 0;
+
+        if (currentUsers[index].jumps  < 0)
+          currentUsers[index].jumps = 0;
+        
 
         this.setState({
             user: currentUsers
@@ -208,32 +246,37 @@ class Home extends Component {
 
         if (this.state.reset == 1) {
             swal({
-                title: 'Are you sure?',
-                text: 'Confirm point reset for ' + currentUsers[index].first+'?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, reset points!'
-              }).then(function() {
-                  swal(
-                    'Successfully Reset!',
-                    'Points reset for '+ currentUsers[index].first+'!',
-                    'success'
-                  )
-              }).catch(swal.noop)
+              title: 'Resetting today\'s points for ' + currentUsers[index].first + ' ' + currentUsers[index].last,
+              //text: 'Confirm point reset for ' + currentUsers[index].first+'?',
+              type: 'warning',
+              //showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              //cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, reset points!'
+            }).then(function() {
+                swal(
+                  'Successfully Reset!',
+                  'Points reset for '+ currentUsers[index].first+'!',
+                  'success'
+                )
+            }).catch(swal.noop)
 
-              this.state.reset = 0;
-              currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
-              currentUsers[index].points[yearMonth].completedHomework =0;
+            this.state.reset = 0;
+            currentUsers[index].points[yearMonth].completedHomework -= currentUsers[index].points[yearMonth][date[2]]["HW"];
+            currentUsers[index].points[yearMonth].completedVolunteering -= currentUsers[index].points[yearMonth][date[2]]["V"];
 
-              currentUsers[index].points[yearMonth][date[2]]["V"] =0;
-              currentUsers[index].totalVolunteering = 0;
-              currentUsers[index].totalHomework = 0;
-              //currentUsers[index].points[yearMonth][date[2]] = undefined;
-              currentUsers[index].points[yearMonth].totalPoints =0;
-              currentUsers[index].totalPoints =0;
-              currentUsers[index].jumps =0;
+            currentUsers[index].totalVolunteering -= currentUsers[index].points[yearMonth][date[2]]["V"];
+            currentUsers[index].totalHomework -= currentUsers[index].points[yearMonth][date[2]]["HW"];
+
+            currentUsers[index].points[yearMonth].totalPoints -= currentUsers[index].points[yearMonth][date[2]]["HW"] + currentUsers[index].points[yearMonth][date[2]]["V"];
+            currentUsers[index].totalPoints -= currentUsers[index].points[yearMonth][date[2]]["HW"] + currentUsers[index].points[yearMonth][date[2]]["V"];
+
+            currentUsers[index].points[yearMonth][date[2]]["HW"] = 0;
+            currentUsers[index].points[yearMonth][date[2]]["V"] =0;
+
+            //currentUsers[index].points[yearMonth][date[2]] = undefined;
+            // what is this lol 
+            currentUsers[index].jumps =0;
 
         }
         
@@ -269,7 +312,7 @@ class Home extends Component {
 
         //alert ("First Name = " + firstName + ", Last Name = " + lastName);
         if(this.state.newStudentName.split(" ").length != 2){
-            alert("PLease enter in the full student's name, separated by a space.");
+            alert("Please enter in the full student's name, separated by a space.");
         }else{
             this.state.base.push('users', {
                 data: {first: firstName, last: lastName, totalHomework: 0, totalVolunteering: 0, totalPoints: 0}
